@@ -11,8 +11,10 @@ import Footer from "./component/Footer/Footer";
 function App() {
   return (
     <Router>
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col min-h-screen bg-black text-white">
         <Header />
+
+        {/* Main content grows to fill available space */}
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -22,6 +24,7 @@ function App() {
             {/* <Route path="/footer" element={<Footer />} /> */}
           </Routes>
         </main>
+
         <Footer />
       </div>
     </Router>
