@@ -83,16 +83,14 @@ const MainContainer = () => {
             <div className="absolute inset-0 pointer-events-none border-2 border-transparent animate-border-glow" />
 
             {/* Text Overlay */}
-            <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4 perspective">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold tracking-wide bg-gradient-to-r from-yellow-400 via-orange-300 to-yellow-200 bg-clip-text text-transparent drop-shadow-2xl transform animate-text-rise">
-                <span className="inline-block transform animate-depth">
-                  What's Hot
-                </span>
+            <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4 perspective space-y-2">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold tracking-wide bg-gradient-to-r from-yellow-400 via-orange-300 to-yellow-200 bg-clip-text text-transparent drop-shadow-2xl animate-fade-up delay-0">
+                What's Hot
               </h2>
-              <p className="text-sm sm:text-base md:text-lg text-gray-300 mt-1 animate-fade-in">
+              <p className="text-sm sm:text-base md:text-lg text-gray-300 animate-fade-up delay-200">
                 in
               </p>
-              <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light text-white mt-1 tracking-wider transform animate-depth delay-300">
+              <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light text-white tracking-wider animate-fade-up delay-400">
                 Titans{" "}
                 <span className="font-medium text-amber-400">Gaming</span>
               </h3>
@@ -143,36 +141,14 @@ const MainContainer = () => {
           }
         }
 
-        @keyframes fade-in {
-          from {
+        @keyframes fade-up {
+          0% {
             opacity: 0;
-            transform: translateY(8px);
+            transform: translateY(30px);
           }
-          to {
+          100% {
             opacity: 1;
             transform: translateY(0);
-          }
-        }
-
-        @keyframes text-rise {
-          0% {
-            opacity: 0;
-            transform: translateY(40px) scale(0.95);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-          }
-        }
-
-        @keyframes depth {
-          0% {
-            transform: rotateX(90deg) scale(0.8);
-            opacity: 0;
-          }
-          100% {
-            transform: rotateX(0deg) scale(1);
-            opacity: 1;
           }
         }
 
@@ -181,20 +157,21 @@ const MainContainer = () => {
           border-image-slice: 1;
         }
 
-        .animate-fade-in {
-          animation: fade-in 1s ease forwards;
+        .animate-fade-up {
+          animation: fade-up 1s ease-out forwards;
+          opacity: 0;
         }
 
-        .animate-text-rise {
-          animation: text-rise 1s ease-out both;
+        .delay-0 {
+          animation-delay: 0s;
         }
 
-        .animate-depth {
-          animation: depth 1.2s ease-out both;
+        .delay-200 {
+          animation-delay: 0.2s;
         }
 
-        .delay-300 {
-          animation-delay: 0.3s;
+        .delay-400 {
+          animation-delay: 0.4s;
         }
 
         .perspective {
