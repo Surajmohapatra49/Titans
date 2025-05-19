@@ -47,7 +47,7 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md shadow-md">
-      <div className="container mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
         <Link
           to="/"
           className="flex items-center space-x-2 flex-shrink-0"
@@ -56,16 +56,16 @@ const Header = () => {
           <img
             src={logo}
             alt="Logo"
-            className="h-10 w-auto max-w-[120px] sm:max-w-[140px] object-contain drop-shadow-sm transition-transform duration-300 hover:scale-110"
+            className="h-8 w-auto max-w-[100px] sm:h-10 sm:max-w-[120px] lg:h-12 lg:max-w-[140px] object-contain drop-shadow-sm transition-transform duration-300 hover:scale-105"
           />
-          <span className="text-lg sm:text-xl font-extrabold text-gray-800 select-none">
+          <span className="text-base sm:text-lg lg:text-xl font-extrabold text-gray-800 select-none">
             Titans Gaming
           </span>
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex flex-wrap flex-grow justify-end">
-          <ul className="flex flex-wrap space-x-6 text-sm sm:text-base font-medium">
+        <nav className="hidden md:flex flex-grow justify-end">
+          <ul className="flex flex-wrap space-x-4 lg:space-x-6 text-xs sm:text-sm lg:text-base font-medium">
             {["home", "tournaments", "about", "winners", "contact"].map(
               (section) => (
                 <li key={section} className="my-1">
@@ -90,21 +90,21 @@ const Header = () => {
           aria-label="Toggle navigation"
           aria-expanded={mobileOpen}
         >
-          {mobileOpen ? <X size={28} /> : <Menu size={28} />}
+          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
       {/* Mobile Dropdown Menu */}
       {mobileOpen && (
         <nav className="md:hidden bg-white border-t border-gray-200 shadow-lg rounded-b-md">
-          <ul className="flex flex-col space-y-4 px-6 py-5 text-base font-medium text-gray-700">
+          <ul className="flex flex-col space-y-3 px-4 py-4 sm:px-6 sm:py-5 text-sm sm:text-base font-medium text-gray-700">
             {["home", "tournaments", "about", "winners", "contact"].map(
               (section) => (
                 <li key={section}>
                   <a
                     href={`#${section}`}
                     onClick={closeMobileMenu}
-                    className={`block w-full transition duration-200 ${getClass(
+                    className={`block w-full transition duration-200 py-2 ${getClass(
                       section
                     )}`}
                   >
