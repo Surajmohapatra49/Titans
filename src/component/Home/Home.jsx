@@ -8,14 +8,14 @@ import Tournaments from "../Tournaments/Tournaments";
 
 const Home = () => {
   return (
-    <div className="pt-20 bg-gradient-to-br from-gray-950 via-gray-900 to-black min-h-screen text-white font-sans">
+    <div className="pt-10 bg-gradient-to-br from-gray-950 via-gray-900 to-black min-h-screen text-white font-sans">
       {/* Home Section */}
       <section id="home" className="container max-w-7xl mx-auto px-6">
         <MainContainer />
       </section>
 
       {/* What’s Hot Section */}
-      <section className="container max-w-7xl mx-auto px-6 py-16 md:py-24">
+      <section className="container max-w-7xl mx-auto px-4 py-14 md:py-24">
         <h2 className="text-4xl sm:text-5xl font-extrabold text-center text-amber-400 mb-12 sm:mb-20 drop-shadow-2xl tracking-wide">
           What’s Hot in Titans Gaming
         </h2>

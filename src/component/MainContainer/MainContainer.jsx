@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 // Import media
 import slide1 from "../../assets/a.jpg";
@@ -34,7 +35,16 @@ const MainContainer = () => {
     });
   }, [currentSlide]);
 
-  const goToSlide = (index) => setCurrentSlide(index);
+  const goToSlide = (index) => {
+    if (index >= 0 && index < slides.length) {
+      setCurrentSlide(index);
+    }
+  };
+
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
+
+  const prevSlide = () =>
+    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
 
   const isVideo = (file) =>
     file.endsWith(".mp4") || file.endsWith(".webm") || file.endsWith(".mov");
@@ -71,8 +81,10 @@ const MainContainer = () => {
             )
           )}
 
+          {/* Gradient Border Animation */}
           <div className="absolute inset-0 pointer-events-none border-2 border-transparent animate-border-glow" />
 
+          {/* Text Content */}
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white z-20">
             <h1 className="text-lg sm:text-xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold tracking-wide bg-gradient-to-r from-white to-amber-400 bg-clip-text text-transparent drop-shadow-lg">
               Welcome Titans
@@ -82,7 +94,8 @@ const MainContainer = () => {
             </p>
           </div>
 
-          <div className="absolute bottom-3 sm:bottom-4 lg:bottom-6 left-1/2 -translate-x-1/2 flex space-x-1.5 sm:space-x-2 lg:space-x-3 z-30">
+          {/* Desktop Dot Navigation */}
+          <div className="absolute bottom-3 sm:bottom-4 lg:bottom-6 left-1/2 -translate-x-1/2 flex space-x-1.5 sm:space-x-2 lg:space-x-3 z-30 hidden sm:flex">
             {slides.map((_, idx) => (
               <button
                 key={idx}
@@ -96,6 +109,20 @@ const MainContainer = () => {
               />
             ))}
           </div>
+
+          {/* Mobile Arrows */}
+          <button
+            onClick={prevSlide}
+            className="block sm:hidden absolute left-3 top-1/2 -translate-y-1/2 z-30 bg-black/40 hover:bg-black/60 text-white rounded-full p-2"
+          >
+            <ChevronLeft size={24} />
+          </button>
+          <button
+            onClick={nextSlide}
+            className="block sm:hidden absolute right-3 top-1/2 -translate-y-1/2 z-30 bg-black/40 hover:bg-black/60 text-white rounded-full p-2"
+          >
+            <ChevronRight size={24} />
+          </button>
         </div>
       </div>
 
