@@ -1,12 +1,11 @@
 import React from "react";
 import { CalendarCheck, Gamepad2, Info } from "lucide-react";
-import Winners from "../Winners/Winners";
 
 const tournaments = [
   {
     id: 1,
     title: "Battle Royale Championship",
-    game: "BGMI ( Livik)",
+    game: "BGMI (Livik)",
     date: "May 1, 2025",
     prize: "₹1,000",
     status: "Registration Open",
@@ -16,14 +15,14 @@ const tournaments = [
     title: "Tactical Showdown",
     game: "BGMI (TDM)",
     date: "May 19, 2025",
-    prize: "₹,500",
+    prize: "₹5,000",
     status: "Upcoming",
   },
   {
     id: 3,
     title: "Survivor",
-    game: "BGMI Erangle",
-    date: "May , 2025",
+    game: "BGMI (Erangel)",
+    date: "May 25, 2025",
     prize: "₹15,000",
     status: "Upcoming",
   },
@@ -39,7 +38,7 @@ const Tournaments = () => {
           Tournaments
         </h1>
 
-        {/* Tournament Cards */}
+        {/* Upcoming Tournaments Section */}
         <section className="mb-24">
           <h2 className="text-2xl sm:text-3xl font-bold text-red-500 mb-8 flex items-center justify-center md:justify-start gap-3 drop-shadow-md">
             <CalendarCheck size={28} className="text-red-600" />
@@ -48,53 +47,72 @@ const Tournaments = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {tournaments.map((t) => (
-              <div
-                key={t.id}
-                className="relative bg-gradient-to-tr from-gray-800 to-gray-900 p-6 sm:p-8 rounded-3xl border border-gray-700 shadow-xl hover:shadow-amber-400 transition duration-300 transform hover:-translate-y-1"
-              >
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-2">
-                  <h3 className="text-xl sm:text-2xl text-amber-300 font-extrabold">
-                    {t.title}
-                  </h3>
-                  <span
-                    className={`px-3 py-1 rounded-full text-xs font-semibold text-center w-fit ${
-                      t.status === "Registration Open"
-                        ? "bg-green-600 text-white"
-                        : "bg-gray-700 text-gray-300"
-                    }`}
-                  >
-                    {t.status}
-                  </span>
+              <div key={t.id} className="group [perspective:1000px] hover:z-10">
+                <div className="relative w-full h-80 transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                  {/* Front Side */}
+                  <div className="absolute w-full h-full backface-hidden bg-gradient-to-tr from-gray-800 to-gray-900 p-6 sm:p-8 rounded-3xl border border-gray-700 shadow-xl">
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-2">
+                      <h3 className="text-xl sm:text-2xl text-amber-300 font-extrabold">
+                        {t.title}
+                      </h3>
+                      <span
+                        className={`px-3 py-1 rounded-full text-xs font-semibold w-fit ${
+                          t.status === "Registration Open"
+                            ? "bg-green-600 text-white"
+                            : "bg-gray-700 text-gray-300"
+                        }`}
+                      >
+                        {t.status}
+                      </span>
+                    </div>
+                    <p className="text-gray-300 mb-1">
+                      <span className="text-red-400 font-semibold">Game:</span>{" "}
+                      {t.game}
+                    </p>
+                    <p className="text-gray-300 mb-1">
+                      <span className="text-red-400 font-semibold">Date:</span>{" "}
+                      {t.date}
+                    </p>
+                    <p className="text-gray-300">
+                      <span className="text-red-400 font-semibold">
+                        Prize Pool:
+                      </span>{" "}
+                      {t.prize}
+                    </p>
+                    <p className="mt-6 text-gray-400 italic text-sm">
+                      Hover for more info →
+                    </p>
+                  </div>
+
+                  {/* Back Side */}
+                  <div className="absolute w-full h-full [transform:rotateY(180deg)] backface-hidden bg-gradient-to-tr from-red-950 to-black p-6 sm:p-8 rounded-3xl border border-amber-500 shadow-2xl text-center flex flex-col justify-between">
+                    <div>
+                      <h4 className="text-xl font-bold text-amber-400 mb-4">
+                        Tournament Highlights
+                      </h4>
+                      <ul className="text-sm text-gray-300 space-y-2 text-left list-disc list-inside">
+                        <li>Intense competition format</li>
+                        <li>Live-streamed finals</li>
+                        <li>Strict fair-play rules</li>
+                        <li>Top-tier talent invited</li>
+                        <li>Exclusive Discord access</li>
+                      </ul>
+                    </div>
+                    {t.status === "Registration Open" && (
+                      <button
+                        onClick={() =>
+                          window.open(
+                            "https://forms.gle/9ZuikgzASMkxK9ov8",
+                            "_blank"
+                          )
+                        }
+                        className="mt-6 bg-gradient-to-br from-yellow-400 via-amber-500 to-red-500 text-black font-bold py-2 rounded-xl shadow-md hover:scale-105 transition-transform duration-200"
+                      >
+                        Register Now
+                      </button>
+                    )}
+                  </div>
                 </div>
-
-                <p className="text-base sm:text-lg text-gray-300 mb-1">
-                  <span className="text-red-400 font-semibold">Game:</span>{" "}
-                  {t.game}
-                </p>
-                <p className="text-base sm:text-lg text-gray-300 mb-1">
-                  <span className="text-red-400 font-semibold">Date:</span>{" "}
-                  {t.date}
-                </p>
-                <p className="text-base sm:text-lg text-gray-300 mb-6">
-                  <span className="text-red-400 font-semibold">
-                    Prize Pool:
-                  </span>{" "}
-                  {t.prize}
-                </p>
-
-                {t.status === "Registration Open" && (
-                  <button
-                    onClick={() =>
-                      window.open(
-                        "https://forms.gle/9ZuikgzASMkxK9ov8",
-                        "_blank"
-                      )
-                    }
-                    className="w-full bg-gradient-to-br from-yellow-400 via-amber-500 to-red-500 text-black font-bold py-3 rounded-xl shadow-[0_6px_0_rgba(0,0,0,0.4)] hover:translate-y-1 transition-all duration-200 active:shadow-none active:translate-y-2"
-                  >
-                    Register
-                  </button>
-                )}
               </div>
             ))}
           </div>

@@ -8,42 +8,46 @@ const About = () => {
   return (
     <section
       id="about"
-      className="pt-24 bg-gradient-to-b from-gray-900 to-black text-white"
+      className="pt-24 pb-16 bg-gradient-to-b from-gray-950 to-black text-white relative"
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 max-w-7xl">
-        {/* Heading */}
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-amber-400 mb-16 text-center drop-shadow-lg tracking-wide flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Users size={36} className="text-amber-500 animate-pulse" />
-          About Titans Gaming
-        </h1>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        {/* Header */}
+        <div className="text-center mb-20">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-amber-400 drop-shadow-lg flex items-center justify-center gap-3 animate-fade-in-down">
+            <Users size={40} className="text-amber-500 animate-pulse" />
+            About Titans Gaming
+          </h1>
+          <p className="mt-4 text-gray-400 text-lg max-w-2xl mx-auto animate-fade-in-up">
+            Discover our mission, values, and the passionate team behind Titans
+            Gaming.
+          </p>
+        </div>
 
-        {/* Mission & Core Values */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
+        {/* Timeline Style Mission & Values */}
+        <div className="relative border-l-4 border-amber-500 pl-8 mb-28 space-y-16">
           {/* Mission */}
-          <div className="space-y-6">
-            <h2 className="text-2xl sm:text-3xl font-bold text-red-600 flex items-center gap-3 border-l-4 border-amber-400 pl-4 shadow-lg mb-4">
-              <ShieldCheck className="text-red-500" size={24} />
+          <div className="relative">
+            <div className="absolute -left-6 top-1 w-4 h-4 bg-amber-500 rounded-full shadow-xl animate-ping"></div>
+            <h2 className="text-2xl font-bold text-red-500 flex items-center gap-2 mb-2">
+              <ShieldCheck className="text-red-400" />
               Our Mission
             </h2>
-            <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
-              Titans Gaming was founded with a simple mission: to create the
-              ultimate gaming community where players can compete, connect, and
-              celebrate their passion for gaming.
-            </p>
-            <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
-              Since our founding in 2015, we've grown from a small local
-              community to a global network of gamers who share our values of
-              fair play, continuous improvement, and gaming excellence.
+            <p className="text-gray-300 text-lg leading-relaxed">
+              Titans Gaming was founded with the goal of building an elite
+              gaming community where players connect, compete, and thrive. Since
+              2015, we've grown from a local squad to a global movement, always
+              guided by the spirit of fair play and ambition.
             </p>
           </div>
 
           {/* Core Values */}
-          <div className="bg-gray-900 p-6 sm:p-8 rounded-3xl shadow-2xl border border-gray-700 hover:border-amber-400 transition-all duration-300">
-            <h2 className="text-2xl sm:text-3xl font-bold text-red-600 flex items-center gap-3 border-l-4 border-yellow-400 pl-4 mb-4">
-              <Star className="text-yellow-400" size={24} />
+          <div className="relative">
+            <div className="absolute -left-6 top-1 w-4 h-4 bg-amber-500 rounded-full shadow-xl animate-ping"></div>
+            <h2 className="text-2xl font-bold text-red-500 flex items-center gap-2 mb-2">
+              <Star className="text-yellow-400" />
               Core Values
             </h2>
-            <ul className="list-disc list-inside text-gray-300 space-y-3 text-base sm:text-lg leading-relaxed">
+            <ul className="text-gray-300 list-disc ml-6 space-y-2 text-lg leading-relaxed">
               <li>Fair competition and sportsmanship</li>
               <li>Community-first approach</li>
               <li>Innovation in gaming experiences</li>
@@ -53,36 +57,38 @@ const About = () => {
           </div>
         </div>
 
-        {/* Our Team */}
-        <div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-red-600 text-center mb-12 drop-shadow-lg tracking-wide">
-            Meet the Team
-          </h2>
+        {/* Modern Team Grid */}
+        <h2 className="text-3xl sm:text-4xl text-center font-bold text-red-500 mb-14 animate-fade-in-down">
+          Meet the Titans
+        </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
-            {[
-              { name: "Rajesh", role: "Founder & CEO", img: rajeshImg },
-              { name: "Suraj", role: "Tournament Director", img: surajImg },
-              { name: "Sandeep", role: "Community Manager", img: sandeepImg },
-            ].map((member, idx) => (
-              <div
-                key={idx}
-                className="bg-gradient-to-tr from-red-900/30 via-white/10 to-white/20 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-2xl border border-red-700 hover:border-amber-400 transition-transform transform hover:scale-105 cursor-pointer text-center"
-              >
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-12">
+          {[
+            { name: "Rajesh", role: "Founder & CEO", img: rajeshImg },
+            { name: "Suraj", role: "Tournament Director", img: surajImg },
+            {
+              name: "Sandeep & Tanmay",
+              role: "Community Manager",
+              img: sandeepImg,
+            },
+          ].map((member, i) => (
+            <div
+              key={i}
+              className="group relative bg-gradient-to-b from-gray-900 via-gray-800 to-black rounded-xl p-6 shadow-2xl hover:shadow-amber-500/30 transform hover:-translate-y-2 transition-all duration-300"
+            >
+              <div className="w-32 h-32 mx-auto overflow-hidden rounded-full border-4 border-amber-500 shadow-lg mb-4 transform group-hover:rotate-2 group-hover:scale-105 transition duration-300">
                 <img
                   src={member.img}
                   alt={member.name}
-                  className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 object-cover rounded-full mx-auto mb-6 border-4 border-amber-400 shadow-lg"
+                  className="w-full h-full object-cover"
                 />
-                <h3 className="text-xl sm:text-2xl font-semibold text-amber-400 mb-2 capitalize">
-                  {member.name}
-                </h3>
-                <p className="text-gray-400 tracking-wide font-medium text-sm sm:text-base">
-                  {member.role}
-                </p>
               </div>
-            ))}
-          </div>
+              <h3 className="text-xl font-semibold text-amber-400 text-center">
+                {member.name}
+              </h3>
+              <p className="text-sm text-gray-400 text-center">{member.role}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

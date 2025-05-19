@@ -66,7 +66,7 @@ const Header = () => {
         {/* Desktop Nav */}
         <nav className="hidden md:flex flex-grow justify-end">
           <ul className="flex flex-wrap space-x-4 lg:space-x-6 text-xs sm:text-sm lg:text-base font-medium">
-            {["home", "tournaments", "about", "winners", "contact"].map(
+            {["home", "tournaments", "winners", "about", "contact"].map(
               (section) => (
                 <li key={section} className="my-1">
                   <a

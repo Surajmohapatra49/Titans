@@ -16,9 +16,9 @@ const Home = () => {
 
       {/* What’s Hot Section */}
       <section className="container max-w-7xl mx-auto px-4 py-14 md:py-24">
-        <h2 className="text-4xl sm:text-5xl font-extrabold text-center text-amber-400 mb-12 sm:mb-20 drop-shadow-2xl tracking-wide">
+        {/* <h2 className="text-4xl sm:text-5xl font-extrabold text-center text-amber-400 mb-12 sm:mb-20 drop-shadow-2xl tracking-wide">
           What’s Hot in Titans Gaming
-        </h2>
+        </h2> */}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
           {/* Card 1: Tournaments */}
@@ -74,14 +74,14 @@ const Home = () => {
         <Tournaments />
       </section>
 
-      {/* About Section */}
-      <section className="container max-w-7xl mx-auto px-6 mb-24">
-        <About />
-      </section>
-
       {/* Winners Section */}
       <section id="winners" className="container max-w-7xl mx-auto px-6 mb-24">
         <Winners />
+      </section>
+
+      {/* About Section */}
+      <section className="container max-w-7xl mx-auto px-6 mb-24">
+        <About />
       </section>
 
       {/* Contact Section */}
