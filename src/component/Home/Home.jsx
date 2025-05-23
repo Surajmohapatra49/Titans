@@ -1,95 +1,228 @@
 import React from "react";
+import CountUp from "react-countup";
+import { useInView } from "react-intersection-observer";
 import MainContainer from "../MainContainer/MainContainer";
-import { Trophy, Users, Newspaper } from "lucide-react";
-import About from "../About/About";
-import Winners from "../Winners/Winners";
-import Contact from "../Contact/Contact";
-import Tournaments from "../Tournaments/Tournaments";
+import slide01 from "../../assets/sk.jpeg";
+import slide02 from "../../assets/g.jpg";
+import slide03 from "../../assets/ff-logo.png";
+import slide04 from "../../assets/bg.jpg";
 
 const Home = () => {
+  const stats = [
+    { number: 1000, suffix: "+", label: "Players Engaged" },
+    { number: 250, suffix: "", label: "Matches Played" },
+    { number: 50, suffix: "+", label: "Live Tournaments" },
+    { number: 85, suffix: "%", label: "Player Satisfaction" },
+  ];
+
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.4,
+  });
+
   return (
-    <div className="pt-10 bg-gradient-to-br from-gray-950 via-gray-900 to-black min-h-screen text-white font-sans">
-      {/* Home Section */}
-      <section id="home" className="container max-w-7xl mx-auto px-6">
-        <MainContainer />
+    <div className="pt-16 bg-gray-100 min-h-screen space-y-24">
+      <MainContainer />
+      {/* Hero Section */}
+      <section className="relative bg-black text-white min-h-[80vh] flex items-center justify-center px-6 overflow-hidden">
+        <img
+          src={slide04}
+          alt="Hero Background"
+          className="absolute inset-0 w-full h-full object-cover opacity-50"
+        />
+        <div className="relative z-10 text-center max-w-3xl">
+          <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-4 drop-shadow-lg">
+            Dive Into the Arena
+          </h1>
+          <p className="text-lg text-gray-200 mb-6">
+            Tactical Titans brings esports battles, legendary gamers, and
+            unmissable moments.
+          </p>
+          <button className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-lg text-lg shadow-lg transition">
+            Join the Battle
+          </button>
+        </div>
       </section>
-
-      {/* What’s Hot Section */}
-      <section className="container max-w-7xl mx-auto px-4 py-14 md:py-24">
-        {/* <h2 className="text-4xl sm:text-5xl font-extrabold text-center text-amber-400 mb-12 sm:mb-20 drop-shadow-2xl tracking-wide">
-          What’s Hot in Titans Gaming
-        </h2> */}
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-          {/* Card 1: Tournaments */}
-          <div className="bg-gradient-to-br from-red-900/10 via-white/5 to-white/10 backdrop-blur-lg rounded-2xl p-6 sm:p-8 border border-white/10 hover:border-amber-500 transition-all duration-300 shadow-2xl hover:scale-105">
-            <div className="flex items-center gap-3 mb-3 sm:mb-4">
-              <Trophy className="text-red-500 w-6 sm:w-8 h-6 sm:h-8" />
-              <h3 className="text-xl sm:text-2xl font-bold text-red-400">
-                Latest Tournaments
-              </h3>
-            </div>
-            <p className="text-gray-300 leading-relaxed text-sm sm:text-base">
-              Battle in our elite online arenas and face off with the world’s
-              best. Weekly prizes, prestige, and bragging rights await in our
-              epic showdowns.
-            </p>
+      {/* Features Section */}
+      <section className="grid md:grid-cols-3 gap-8 px-4 py-16 container mx-auto">
+        {[
+          {
+            img: slide02,
+            title: "Intense Tournaments",
+            text: "Fight for glory in monthly esports leagues.",
+          },
+          {
+            img: slide02,
+            title: "Global Leaderboards",
+            text: "Top players ranked live, daily.",
+          },
+          {
+            img: slide02,
+            title: "Gaming Buzz",
+            text: "Stay updated with every drop.",
+          },
+        ].map((card, index) => (
+          <div
+            key={index}
+            className="bg-white rounded-2xl shadow-2xl p-6 hover:scale-105 transition-all duration-300 cursor-pointer"
+          >
+            <img
+              src={card.img}
+              alt={card.title}
+              className="w-full h-48 object-cover rounded-xl mb-4"
+            />
+            <h3 className="text-xl font-bold mb-2">{card.title}</h3>
+            <p className="text-gray-600">{card.text}</p>
           </div>
-
-          {/* Card 2: Top Players */}
-          <div className="bg-gradient-to-br from-red-900/10 via-white/5 to-white/10 backdrop-blur-lg rounded-2xl p-6 sm:p-8 border border-white/10 hover:border-amber-500 transition-all duration-300 shadow-2xl hover:scale-105">
-            <div className="flex items-center gap-3 mb-3 sm:mb-4">
-              <Users className="text-red-500 w-6 sm:w-8 h-6 sm:h-8" />
-              <h3 className="text-xl sm:text-2xl font-bold text-red-400">
-                Top Players
-              </h3>
+        ))}
+      </section>
+      {/* Stats Section */}
+      <section
+        ref={ref}
+        className="bg-gradient-to-r from-gray-900 to-black text-white py-16"
+      >
+        <div className="container mx-auto grid md:grid-cols-4 gap-8 text-center">
+          {stats.map((item, idx) => (
+            <div key={idx} className="text-3xl font-bold">
+              <div className="text-pink-500 text-5xl mb-2">
+                {inView ? (
+                  <CountUp end={item.number} duration={2.5} separator="," />
+                ) : (
+                  "0"
+                )}
+                {item.suffix}
+              </div>
+              <div className="text-gray-300">{item.label}</div>
             </div>
-            <p className="text-gray-300 leading-relaxed text-sm sm:text-base">
-              Meet the legends. Our leaderboard showcases elite gamers across
-              genres. Track the champions and aim to climb the ranks yourself.
+          ))}
+        </div>
+      </section>
+      {/* Streamer Spotlight Section */}
+      <section className="bg-white py-20 px-4">
+        <div className="container mx-auto flex flex-col md:flex-row items-center gap-12">
+          <img
+            src={slide02}
+            alt="Streamer"
+            className="w-full md:w-1/2 rounded-3xl shadow-xl"
+          />
+          <div className="md:w-1/2">
+            <h2 className="text-3xl font-bold mb-4 text-gray-900">
+              Meet the Legends:{" "}
+              <span className="text-pink-500">ShadowStrike</span>
+            </h2>
+            <p className="text-gray-700 mb-6">
+              With over 10 million views, ShadowStrike has become a symbol of
+              clutch plays and crowd-pleasing finishes. Watch live streams and
+              exclusive behind-the-scenes.
             </p>
-          </div>
-
-          {/* Card 3: Gaming News */}
-          <div className="bg-gradient-to-br from-red-900/10 via-white/5 to-white/10 backdrop-blur-lg rounded-2xl p-6 sm:p-8 border border-white/10 hover:border-amber-500 transition-all duration-300 shadow-2xl hover:scale-105">
-            <div className="flex items-center gap-3 mb-3 sm:mb-4">
-              <Newspaper className="text-red-500 w-6 sm:w-8 h-6 sm:h-8" />
-              <h3 className="text-xl sm:text-2xl font-bold text-red-400">
-                Gaming News
-              </h3>
-            </div>
-            <p className="text-gray-300 leading-relaxed text-sm sm:text-base">
-              Stay updated with the latest releases, esports announcements,
-              patch updates, and trending community stories — all in one place.
-            </p>
+            <button className="bg-black text-white px-5 py-3 rounded hover:bg-gray-800 transition">
+              Watch Now
+            </button>
           </div>
         </div>
       </section>
 
-      {/* Tournaments Section */}
-      <section
-        id="tournaments"
-        className="container max-w-7xl mx-auto px-6 mb-24"
-      >
-        <Tournaments />
+      {/* Tournament Rules Section */}
+      <section className="bg-gradient-to-br from-pink-50 to-pink-100 py-20 px-6">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-4xl font-extrabold text-gray-900 mb-12 drop-shadow-lg">
+            🛡️ Tournament Rules
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              "Each team must consist of 4 to 6 players.",
+              "No use of third-party cheats or hacks is allowed.",
+              "Respectful behavior toward opponents and organizers is mandatory.",
+              "Matches must start within 5 minutes of the scheduled time.",
+              "Disputes must be reported within 15 minutes of match end.",
+              "Failure to follow rules may result in disqualification.",
+            ].map((rule, idx) => (
+              <div
+                key={idx}
+                className="relative bg-white p-6 rounded-2xl shadow-2xl transform transition duration-500 hover:rotate-y-6 hover:scale-105 hover:shadow-pink-400"
+                style={{
+                  transformStyle: "preserve-3d",
+                  perspective: "1000px",
+                }}
+              >
+                <div className="text-left">
+                  <h3 className="text-xl font-bold text-pink-600 mb-2">
+                    Rule {idx + 1}
+                  </h3>
+                  <p className="text-gray-700">{rule}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
-      {/* Winners Section */}
-      <section id="winners" className="container max-w-7xl mx-auto px-6 mb-24">
-        <Winners />
+      {/* Testimonials Section */}
+      <section className="bg-gray-50 py-20">
+        <h2 className="text-3xl font-bold text-center mb-10 text-gray-800">
+          What Our Players Say
+        </h2>
+        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-6 px-6">
+          {[
+            {
+              name: "Drako",
+              text: "The best competitive scene. Every match feels like a final!",
+              img: slide01,
+            },
+            {
+              name: "ViperQueen",
+              text: "Tactical Titans gave me my first break as a streamer.",
+              img: slide01,
+            },
+            {
+              name: "BlazeKid",
+              text: "Tournaments are lit! They’re fair, fast, and super fun.",
+              img: slide01,
+            },
+          ].map((t, i) => (
+            <div
+              key={i}
+              className="bg-white rounded-xl p-6 shadow-lg text-center"
+            >
+              <img
+                src={t.img}
+                alt={t.name}
+                className="w-16 h-16 rounded-full mx-auto mb-4"
+              />
+              <p className="italic text-gray-600">"{t.text}"</p>
+              <p className="mt-4 font-semibold text-pink-500">{t.name}</p>
+            </div>
+          ))}
+        </div>
       </section>
-
-      {/* About Section */}
-      <section className="container max-w-7xl mx-auto px-6 mb-24">
-        <About />
+      {/* Sponsors Section */}
+      <section className="bg-black py-16">
+        <h2 className="text-3xl text-white font-bold text-center mb-12">
+          Powered By
+        </h2>
+        <div className="flex flex-wrap justify-center gap-10 items-center px-4">
+          {[slide03, slide03, slide03].map((logo, idx) => (
+            <img
+              key={idx}
+              src={logo}
+              alt="Sponsor"
+              className="h-12 grayscale hover:grayscale-0 transition duration-300"
+            />
+          ))}
+        </div>
       </section>
-
-      {/* Contact Section */}
-      <section
-        id="contact"
-        className="container max-w-7xl mx-auto px-6 py-16 text-center"
-      >
-        <Contact />
+      {/* Call To Action */}
+      <section className="bg-pink-600 text-white text-center py-20 px-6 rounded-t-[3rem]">
+        <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
+          Ready to Rise?
+        </h2>
+        <p className="text-lg mb-8 max-w-2xl mx-auto">
+          Join thousands of gamers from across the globe. Start your tactical
+          journey with us today!
+        </p>
+        <button className="bg-black px-6 py-3 rounded-full text-white text-lg hover:bg-gray-900 transition">
+          Get Started Now
+        </button>
       </section>
     </div>
   );

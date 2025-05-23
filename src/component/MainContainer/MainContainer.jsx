@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import slide1 from "../../assets/a.jpg";
-import slide2 from "../../assets/b.mp4";
-import slide3 from "../../assets/c.mp4";
+import slide2 from "../../assets/b.jpg";
+import slide3 from "../../assets/c.jpg";
 import slide4 from "../../assets/d.jpg";
-import slide5 from "../../assets/e.mp4";
-import slide6 from "../../assets/f.mp4";
+import slide5 from "../../assets/e.jpeg";
+import slide6 from "../../assets/f.jpg";
 import slide7 from "../../assets/g.jpg";
 
 const MainContainer = () => {
@@ -15,10 +15,10 @@ const MainContainer = () => {
   const videoRefs = useRef([]);
 
   useEffect(() => {
-    const slideInterval = setInterval(() => {
+    const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 30000);
-    return () => clearInterval(slideInterval);
+    }, 15000);
+    return () => clearInterval(interval);
   }, [slides.length]);
 
   useEffect(() => {
@@ -34,151 +34,88 @@ const MainContainer = () => {
     });
   }, [currentSlide]);
 
-  const goToSlide = (index) => {
-    if (index >= 0 && index < slides.length) {
-      setCurrentSlide(index);
-    }
-  };
-
-  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
-  const prevSlide = () =>
-    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
-
   const isVideo = (file) =>
     file.endsWith(".mp4") || file.endsWith(".webm") || file.endsWith(".mov");
 
+  const goToSlide = (idx) => {
+    if (idx >= 0 && idx < slides.length) {
+      setCurrentSlide(idx);
+    }
+  };
+
   return (
-    <main className="bg-gradient-to-br from-[#0f0f0f] via-black to-[#1a1a1a]">
-      <div className="container mx-auto px-4 lg:px-6">
-        <div className="relative w-full h-[70vh] sm:h-[75vh] md:h-[80vh] lg:h-[85vh] xl:h-[90vh] group transition-transform duration-700">
-          <div className="relative w-full h-full overflow-hidden shadow-xl backdrop-blur-sm bg-white/5 border border-white/10 rounded-none">
-            {slides.map((slide, idx) =>
-              isVideo(slide) ? (
-                <video
-                  key={idx}
-                  src={slide}
-                  loop
-                  muted
-                  playsInline
-                  ref={(el) => (videoRefs.current[idx] = el)}
-                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
-                    idx === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
-                  }`}
-                />
-              ) : (
-                <img
-                  key={idx}
-                  src={slide}
-                  alt={`Slide ${idx + 1}`}
-                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out transform ${
-                    idx === currentSlide
-                      ? "opacity-100 z-10 scale-[1.03]"
-                      : "opacity-0 z-0 scale-100"
-                  }`}
-                />
-              )
-            )}
+    <div
+      className="relative w-full overflow-hidden"
+      style={{ height: "calc(100vh - 64px)" }} // Adjust 64px if your navbar height is different
+    >
+      {slides.map((slide, idx) =>
+        isVideo(slide) ? (
+          <video
+            key={idx}
+            ref={(el) => (videoRefs.current[idx] = el)}
+            src={slide}
+            muted
+            loop
+            playsInline
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+              currentSlide === idx ? "opacity-100 z-10" : "opacity-0 z-0"
+            }`}
+            style={{ imageRendering: "auto" }}
+            width={3840}
+            height={2160}
+          />
+        ) : (
+          <img
+            key={idx}
+            src={slide}
+            alt={`Slide ${idx}`}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+              currentSlide === idx ? "opacity-100 z-10" : "opacity-0 z-0"
+            }`}
+            style={{ imageRendering: "auto" }}
+            width={3840}
+            height={2160}
+          />
+        )
+      )}
 
-            {/* Glow Border */}
-            <div className="absolute inset-0 pointer-events-none border-2 border-transparent animate-border-glow" />
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/50 z-20" />
 
-            {/* Text Overlay */}
-            <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4 perspective space-y-2">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold tracking-wide bg-gradient-to-r from-yellow-400 via-orange-300 to-yellow-200 bg-clip-text text-transparent drop-shadow-2xl animate-fade-up delay-0">
-                What's Hot
-              </h2>
-              <p className="text-sm sm:text-base md:text-lg text-gray-300 animate-fade-up delay-200">
-                in
-              </p>
-              <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light text-white tracking-wider animate-fade-up delay-400">
-                Titans{" "}
-                <span className="font-medium text-amber-400">Gaming</span>
-              </h3>
-            </div>
-
-            {/* Navigation Dots */}
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-30 hidden sm:flex">
-              {slides.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => goToSlide(idx)}
-                  aria-label={`Slide ${idx + 1}`}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    currentSlide === idx
-                      ? "bg-yellow-400 shadow-[0_0_8px_2px_rgba(255,191,0,0.6)] scale-110"
-                      : "bg-white/30 hover:bg-white/60"
-                  }`}
-                />
-              ))}
-            </div>
-
-            {/* Mobile Arrows */}
-            <button
-              onClick={prevSlide}
-              className="block sm:hidden absolute left-3 top-1/2 -translate-y-1/2 z-30 bg-black/40 hover:bg-black/60 text-white rounded-full p-2"
-            >
-              <ChevronLeft size={24} />
-            </button>
-            <button
-              onClick={nextSlide}
-              className="block sm:hidden absolute right-3 top-1/2 -translate-y-1/2 z-30 bg-black/40 hover:bg-black/60 text-white rounded-full p-2"
-            >
-              <ChevronRight size={24} />
-            </button>
-          </div>
-        </div>
+      {/* Navigation Dots */}
+      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-30 flex space-x-2">
+        {slides.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => goToSlide(idx)}
+            className={`w-3 h-3 rounded-full transition-all ${
+              currentSlide === idx
+                ? "bg-amber-400 scale-110"
+                : "bg-white/30 hover:bg-white/50"
+            }`}
+            aria-label={`Go to slide ${idx + 1}`}
+          />
+        ))}
       </div>
 
-      {/* Animation Styles */}
-      <style jsx>{`
-        @keyframes border-glow {
-          0%,
-          100% {
-            border-image: linear-gradient(90deg, #facc15, #f97316, #facc15) 1;
-          }
-          50% {
-            border-image: linear-gradient(90deg, #f97316, #facc15, #f97316) 1;
-          }
+      {/* Arrows */}
+      <button
+        onClick={() =>
+          setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
         }
-
-        @keyframes fade-up {
-          0% {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-border-glow {
-          animation: border-glow 4s ease-in-out infinite;
-          border-image-slice: 1;
-        }
-
-        .animate-fade-up {
-          animation: fade-up 1s ease-out forwards;
-          opacity: 0;
-        }
-
-        .delay-0 {
-          animation-delay: 0s;
-        }
-
-        .delay-200 {
-          animation-delay: 0.2s;
-        }
-
-        .delay-400 {
-          animation-delay: 0.4s;
-        }
-
-        .perspective {
-          perspective: 1000px;
-        }
-      `}</style>
-    </main>
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-30 p-2 bg-black/40 hover:bg-black/60 rounded-full text-white sm:hidden"
+        aria-label="Previous Slide"
+      >
+        <ChevronLeft size={24} />
+      </button>
+      <button
+        onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-30 p-2 bg-black/40 hover:bg-black/60 rounded-full text-white sm:hidden"
+        aria-label="Next Slide"
+      >
+        <ChevronRight size={24} />
+      </button>
+    </div>
   );
 };
 

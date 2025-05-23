@@ -1,123 +1,99 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import logo from "../../assets/logo.png";
 import { Menu, X } from "lucide-react";
+import logo from "../../assets/logo.png";
 
 const Header = () => {
   const location = useLocation();
-  const [activeSection, setActiveSection] = useState("home");
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  useEffect(() => {
-    const sectionIds = ["home", "about", "tournaments", "winners", "contact"];
-    const observers = [];
+  const isActive = (path) => {
+    return location.pathname === path
+      ? "text-pink-500 border-b-2 border-pink-500 neon-text"
+      : "hover:text-pink-400 transition duration-300";
+  };
 
-    sectionIds.forEach((id) => {
-      const section = document.getElementById(id);
-      if (!section) return;
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen((prev) => !prev);
+  };
 
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setActiveSection(id);
-          }
-        },
-        {
-          root: null,
-          threshold: 0.5,
-        }
-      );
-
-      observer.observe(section);
-      observers.push(observer);
-    });
-
-    return () => {
-      observers.forEach((observer) => observer.disconnect());
-    };
-  }, []);
-
-  const getClass = (section) =>
-    activeSection === section
-      ? "text-red-600 border-b-2 border-red-600"
-      : "text-gray-700 hover:text-red-600";
-
-  const toggleMobileMenu = () => setMobileOpen((prev) => !prev);
-  const closeMobileMenu = () => setMobileOpen(false);
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md shadow-md">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+    <header className="bg-white text-gray-800 fixed top-0 left-0 right-0 z-50 shadow-md">
+      <div className="container mx-auto flex items-center justify-between py-4 px-6">
+        {/* Logo */}
         <Link
           to="/"
-          className="flex items-center space-x-2 flex-shrink-0"
+          className="flex items-center space-x-2"
           onClick={closeMobileMenu}
         >
-          <img
-            src={logo}
-            alt="Logo"
-            className="h-8 w-auto max-w-[100px] sm:h-10 sm:max-w-[120px] lg:h-12 lg:max-w-[140px] object-contain drop-shadow-sm transition-transform duration-300 hover:scale-105"
-          />
-          <span className="text-base sm:text-lg lg:text-xl font-extrabold text-gray-800 select-none">
-            Titans Gaming
+          <img src={logo} alt="Logo" className="h-10 w-auto object-contain" />
+          <span className="text-xl font-extrabold text-pink-500 neon-text">
+            Tactical Titans
           </span>
         </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex flex-grow justify-end">
-          <ul className="flex flex-wrap space-x-4 lg:space-x-6 text-xs sm:text-sm lg:text-base font-medium">
-            {["home", "tournaments", "winners", "about", "contact"].map(
-              (section) => (
-                <li key={section} className="my-1">
-                  <a
-                    href={`#${section}`}
-                    className={`transition duration-200 pb-1 ${getClass(
-                      section
-                    )}`}
-                  >
-                    {section.charAt(0).toUpperCase() + section.slice(1)}
-                  </a>
-                </li>
-              )
-            )}
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex">
+          <ul className="flex space-x-6 text-sm font-semibold">
+            {navItems.map(({ label, path }) => (
+              <li key={path}>
+                <Link to={path} className={`px-2 py-1 ${isActive(path)}`}>
+                  {label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </nav>
 
-        {/* Mobile Toggle Button */}
-        <button
-          className="md:hidden text-gray-800 p-2 rounded-md hover:bg-gray-200 transition"
-          onClick={toggleMobileMenu}
-          aria-label="Toggle navigation"
-          aria-expanded={mobileOpen}
-        >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        {/* Mobile Menu Toggle */}
+        <div className="md:hidden">
+          <button
+            onClick={toggleMobileMenu}
+            className="text-gray-800 focus:outline-none"
+          >
+            {isMobileMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
+          </button>
+        </div>
       </div>
 
-      {/* Mobile Dropdown Menu */}
-      {mobileOpen && (
-        <nav className="md:hidden bg-white border-t border-gray-200 shadow-lg rounded-b-md">
-          <ul className="flex flex-col space-y-3 px-4 py-4 sm:px-6 sm:py-5 text-sm sm:text-base font-medium text-gray-700">
-            {["home", "tournaments", "about", "winners", "contact"].map(
-              (section) => (
-                <li key={section}>
-                  <a
-                    href={`#${section}`}
-                    onClick={closeMobileMenu}
-                    className={`block w-full transition duration-200 py-2 ${getClass(
-                      section
-                    )}`}
-                  >
-                    {section.charAt(0).toUpperCase() + section.slice(1)}
-                  </a>
-                </li>
-              )
-            )}
+      {/* Mobile Menu Dropdown */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-white shadow-lg border-t border-gray-200">
+          <ul className="flex flex-col text-sm font-semibold px-6 py-4 space-y-4">
+            {navItems.map(({ label, path }) => (
+              <li key={path}>
+                <Link
+                  to={path}
+                  className={`block ${isActive(path)}`}
+                  onClick={closeMobileMenu}
+                >
+                  {label}
+                </Link>
+              </li>
+            ))}
           </ul>
-        </nav>
+        </div>
       )}
     </header>
   );
 };
+
+const navItems = [
+  { label: "Home", path: "/" },
+  { label: "Tournaments", path: "/tournaments" },
+  { label: "Winners", path: "/winners" },
+  { label: "News", path: "/news" },
+  { label: "Register", path: "/register" },
+  { label: "About", path: "/about" },
+  { label: "Contact", path: "/contact" },
+];
 
 export default Header;
