@@ -77,9 +77,7 @@ const MainContainer = () => {
             muted
             loop
             playsInline
-            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full ${
-              isMobile ? "object-cover" : "object-contain"
-            } transition-opacity duration-1000 ease-in-out ${
+            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
               currentSlide === idx ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
             width={3840}
@@ -90,9 +88,7 @@ const MainContainer = () => {
             key={idx}
             src={slide}
             alt={`Slide ${idx}`}
-            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full ${
-              isMobile ? "object-cover" : "object-contain"
-            } transition-opacity duration-1000 ease-in-out ${
+            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
               currentSlide === idx ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
             width={3840}
@@ -125,7 +121,7 @@ const MainContainer = () => {
         onClick={() =>
           setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
         }
-        className="absolute left-3 top-1/2 -translate-y-1/2 z-30 p-2 bg-black/40 hover:bg-black/60 rounded-full text-white"
+        className="absolute left-3 top-1/2 -translate-y-1/2 z-30 p-2 bg-black/60 hover:bg-black/70 rounded-full text-white"
         aria-label="Previous Slide"
       >
         <ChevronLeft size={20} className="sm:size-24" />
