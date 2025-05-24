@@ -8,7 +8,7 @@ import slide2 from "../../assets/b.jpg";
 import slide3 from "../../assets/c.jpg";
 import slide4 from "../../assets/d.jpg";
 import slide5 from "../../assets/e.jpeg";
-import slide6 from "../../assets/f.jpg";
+import slide6 from "../../assets/f.jpeg";
 import slide7 from "../../assets/g.jpg";
 
 // Mobile images
@@ -20,10 +20,8 @@ const MainContainer = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const videoRefs = useRef([]);
 
-  // Detect screen size
   const isMobile = useMediaQuery({ query: "(max-width: 640px)" });
 
-  // Slides for different screens
   const desktopSlides = [
     slide5,
     slide1,
@@ -39,7 +37,7 @@ const MainContainer = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 15000);
+    }, 5000);
     return () => clearInterval(interval);
   }, [slides.length]);
 
@@ -67,7 +65,7 @@ const MainContainer = () => {
   };
 
   return (
-    <div className="relative w-full overflow-hidden h-[calc(100vh-64px)] sm:h-screen">
+    <div className="relative w-full overflow-hidden h-[calc(80vh-64px)] sm:h-screen">
       {slides.map((slide, idx) =>
         isVideo(slide) ? (
           <video
@@ -77,7 +75,7 @@ const MainContainer = () => {
             muted
             loop
             playsInline
-            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+            className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
               currentSlide === idx ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
             width={3840}
@@ -88,17 +86,15 @@ const MainContainer = () => {
             key={idx}
             src={slide}
             alt={`Slide ${idx}`}
-            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+            className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out [image-rendering:crisp-edges] ${
               currentSlide === idx ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
-            width={3840}
-            height={2160}
+            loading="eager"
           />
         )
       )}
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/50 z-20" />
+      {/* No overlay applied to preserve image clarity */}
 
       {/* Navigation Dots */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex space-x-2">
@@ -116,22 +112,22 @@ const MainContainer = () => {
         ))}
       </div>
 
-      {/* Arrows */}
+      {/* Arrows (solid background for clear appearance) */}
       <button
         onClick={() =>
           setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
         }
-        className="absolute left-3 top-1/2 -translate-y-1/2 z-30 p-2 bg-black/60 hover:bg-black/70 rounded-full text-white"
+        className="absolute left-3 top-1/2 -translate-y-1/2 z-30 p-2 bg-black text-white hover:bg-black/80 rounded-full"
         aria-label="Previous Slide"
       >
-        <ChevronLeft size={20} className="sm:size-24" />
+        <ChevronLeft size={24} />
       </button>
       <button
         onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
-        className="absolute right-3 top-1/2 -translate-y-1/2 z-30 p-2 bg-black/40 hover:bg-black/60 rounded-full text-white"
+        className="absolute right-3 top-1/2 -translate-y-1/2 z-30 p-2 bg-black text-white hover:bg-black/80 rounded-full"
         aria-label="Next Slide"
       >
-        <ChevronRight size={20} className="sm:size-24" />
+        <ChevronRight size={24} />
       </button>
     </div>
   );

@@ -21,7 +21,7 @@ const Home = () => {
   });
 
   return (
-    <div className="pt-16 bg-gray-100 min-h-screen space-y-24">
+    <div className="pt-16  min-h-screen space-y-24">
       <MainContainer />
       {/* Hero Section */}
       <section className="relative bg-black text-white min-h-[80vh] flex items-center justify-center px-6 overflow-hidden">
