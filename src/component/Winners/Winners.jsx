@@ -60,51 +60,56 @@ const ClassicShowcaseSection = () => {
       <style>{`
         .flip-card {
           perspective: 1500px;
+          width: 100%;
+          max-width: 24rem; /* 384px */
+          height: 18rem; /* 288px */
+          position: relative;
+          margin: 0 auto;
         }
+
         .flip-inner {
+          position: relative;
+          width: 100%;
+          height: 100%;
           transition: transform 0.8s ease;
           transform-style: preserve-3d;
-          position: relative;
-          height: 100%;
           border-radius: 1rem;
+          will-change: transform;
+          cursor: pointer;
         }
-        /* Desktop hover flip */
-        @media (hover: hover) and (pointer: fine) {
-          .flip-card:hover .flip-inner {
-            transform: rotateY(180deg);
-          }
-          /* On desktop, buttons are hidden */
-          .more-btn, .back-btn {
-            display: none;
-          }
-        }
-        /* Mobile flip if flipped class */
+
         .flip-inner.flipped {
           transform: rotateY(180deg);
         }
 
         .flip-front,
         .flip-back {
-          backface-visibility: hidden;
           position: absolute;
-          top: 0;
-          left: 0;
           width: 100%;
           height: 100%;
           border-radius: 1rem;
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden; /* Safari */
+          -webkit-transform-style: preserve-3d; /* Safari */
+          transform-style: preserve-3d;
+          top: 0;
+          left: 0;
           padding: 2rem;
+          box-sizing: border-box;
           display: flex;
           flex-direction: column;
           justify-content: center;
-          box-sizing: border-box;
           user-select: none;
         }
+
         .flip-back {
           transform: rotateY(180deg);
           background-color: #ea580c; /* orange-600 */
           color: black;
           text-align: center;
-          position: relative;
+          position: absolute;
+          top: 0;
+          left: 0;
         }
 
         .glow-card {
@@ -113,10 +118,8 @@ const ClassicShowcaseSection = () => {
           box-shadow: 
             0 4px 10px rgba(234, 88, 12, 0.4),
             inset 0 0 10px rgba(234, 88, 12, 0.1);
-          transition: all 0.4s ease;
           height: 100%;
-          cursor: default;
-          will-change: transform;
+          transition: all 0.4s ease;
         }
         .glow-card:hover {
           box-shadow: 
@@ -164,6 +167,17 @@ const ClassicShowcaseSection = () => {
           color: white;
         }
 
+        /* Desktop hover flip */
+        @media (hover: hover) and (pointer: fine) {
+          .flip-card:hover .flip-inner {
+            transform: rotateY(180deg);
+          }
+          /* On desktop, hide mobile buttons */
+          .more-btn, .back-btn {
+            display: none;
+          }
+        }
+
         /* Responsive tweaks */
         @media (max-width: 640px) {
           .flip-front, .flip-back {
@@ -182,7 +196,6 @@ const ClassicShowcaseSection = () => {
             font-size: 0.9rem;
             padding: 0.3rem 0.8rem;
           }
-          /* On mobile, make card cursor default except buttons */
           .glow-card {
             cursor: default;
           }
@@ -223,7 +236,7 @@ const ClassicShowcaseSection = () => {
               return (
                 <div
                   key={index}
-                  className="flip-card w-full max-w-md mx-auto h-72"
+                  className="flip-card"
                   aria-label={`${item.name} card`}
                 >
                   <div
