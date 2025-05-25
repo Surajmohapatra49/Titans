@@ -10,26 +10,26 @@ const News = () => {
   const toggleReadMore = () => setReadMore(!readMore);
 
   return (
-    <section className="min-h-screen py-24 px-8 md:px-20 bg-[#fffdfa] relative">
+    <section className="min-h-screen py-24 px-8 md:px-20 bg-[#fffaf5] relative">
       <div className="text-center mb-12">
-        <h1 className="text-5xl font-bold text-[#7f1d1d]">Latest News</h1>
-        <div className="w-24 h-1 bg-[#f43f5e] mt-3 mx-auto rounded"></div>
+        <h1 className="text-5xl font-bold text-orange-600">Latest News</h1>
+        <div className="w-24 h-1 bg-orange-600 mt-3 mx-auto rounded"></div>
       </div>
 
       {/* News Card */}
       <div
-        className="max-w-sm rounded-xl shadow-lg bg-[#ffe5e5] p-4 cursor-pointer hover:scale-105 transition"
+        className="max-w-sm rounded-xl shadow-lg bg-orange-100 p-4 cursor-pointer hover:scale-105 transition"
         onClick={toggleModal}
       >
         <img src={slide10} alt="WCG 2025" className="rounded-lg mb-4" />
-        <h2 className="font-semibold text-lg text-[#1f2937] mb-2">
+        <h2 className="font-semibold text-lg text-gray-800 mb-2">
           WCG 2025 Announces Natio...
         </h2>
-        <p className="text-[#6b7280] font-medium text-sm">
+        <p className="text-gray-600 font-medium text-sm">
           WCG 2025 Announces National Showdown India in Collaboration with
           Upthrust...
         </p>
-        <p className="text-[#6b7280] text-xs mt-2">April 21st, 2025</p>
+        <p className="text-gray-500 text-xs mt-2">April 21st, 2025</p>
       </div>
 
       {/* Modal */}
@@ -38,19 +38,19 @@ const News = () => {
           <div className="bg-white rounded-xl max-w-2xl w-full p-6 relative shadow-lg">
             <button
               onClick={toggleModal}
-              className="absolute top-4 right-4 text-gray-500 hover:text-red-600"
+              className="absolute top-4 right-4 text-gray-500 hover:text-orange-600"
             >
               <X className="w-6 h-6" />
             </button>
 
-            <h3 className="text-xl font-bold text-[#1f2937] mb-4">
+            <h3 className="text-xl font-bold text-gray-800 mb-4">
               WCG 2025 Announces National Showdown India in Collaboration with
               Upthrust Esports
             </h3>
 
             <img src={slide10} alt="WCG Poster" className="rounded-lg mb-4" />
 
-            <p className="text-[#374151]">
+            <p className="text-gray-700">
               WCG 2025 is bringing the heat to India with a national showdown
               featuring the best teams across the country in partnership with
               Upthrust Esports.
@@ -69,13 +69,13 @@ const News = () => {
             <div className="mt-6 flex gap-4">
               <button
                 onClick={toggleReadMore}
-                className="px-4 py-2 bg-[#f3f4f6] text-[#111827] rounded-md font-semibold hover:bg-[#e5e7eb] transition"
+                className="px-4 py-2 bg-gray-100 text-gray-800 rounded-md font-semibold hover:bg-gray-200 transition"
               >
                 {readMore ? "Show Less" : "Read more"}
               </button>
               <button
                 onClick={toggleModal}
-                className="px-4 py-2 bg-[#fef2f2] text-[#b91c1c] rounded-md font-semibold hover:bg-[#fee2e2] transition"
+                className="px-4 py-2 bg-orange-100 text-orange-600 rounded-md font-semibold hover:bg-orange-200 transition"
               >
                 Close
               </button>

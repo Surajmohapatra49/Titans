@@ -6,8 +6,8 @@ const Footer = () => {
   return (
     <footer className="relative bg-white pt-16 text-gray-700 overflow-hidden">
       {/* Radial glow background */}
-      <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-rose-100 rounded-full blur-[120px] z-0" />
-      <div className="absolute -top-24 -right-24 w-96 h-96 bg-rose-100 rounded-full blur-[120px] z-0" />
+      <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-orange-100 rounded-full blur-[120px] z-0" />
+      <div className="absolute -top-24 -right-24 w-96 h-96 bg-orange-100 rounded-full blur-[120px] z-0" />
 
       {/* Content Area */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 pb-8">
@@ -22,7 +22,7 @@ const Footer = () => {
             production, dynamic marketing..
           </p>
 
-          <div className="flex justify-center md:justify-start gap-5 text-red-500 mb-8">
+          <div className="flex justify-center md:justify-start gap-5 text-orange-600 mb-8">
             {[Facebook, Instagram, Twitter, Linkedin, Youtube].map(
               (Icon, index) => (
                 <a
@@ -49,7 +49,7 @@ const Footer = () => {
               <a
                 key={label}
                 href={`/${label.toLowerCase()}`}
-                className="hover:text-red-500 transition-colors"
+                className="hover:text-orange-600 transition-colors"
               >
                 {label}
               </a>
@@ -80,7 +80,7 @@ const Footer = () => {
             />
             <button
               type="submit"
-              className="bg-red-500 text-white font-semibold px-6 py-2 rounded hover:bg-red-600 transition flex items-center justify-center gap-2 w-full md:w-auto"
+              className="bg-orange-600 text-white font-semibold px-6 py-2 rounded hover:bg-orange-700 transition flex items-center justify-center gap-2 w-full md:w-auto"
             >
               Send Message <span className="text-lg">→</span>
             </button>
@@ -88,8 +88,8 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Bottom copyright outside of grid */}
-      <div className="relative z-10   mt-8 pt-4 text-sm text-center text-gray-400 px-4">
+      {/* Bottom copyright */}
+      <div className="relative z-10 mt-8 pt-4 text-sm text-center text-gray-400 px-4">
         &copy; 2025 Tactical Titans. All Rights Reserved.
       </div>
     </footer>

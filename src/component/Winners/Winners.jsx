@@ -3,83 +3,292 @@ import React, { useState } from "react";
 const ClassicShowcaseSection = () => {
   const [selectedTab, setSelectedTab] = useState("winners");
 
-  const winners = [
-    { name: "Alpha Squad", event: "Crew Wars", prize: "₹12,000" },
-    { name: "Omega Ops", event: "Tactical Clash", prize: "₹8,000" },
-    { name: "Night Vipers", event: "Sniper Royale", prize: "₹5,000" },
-    { name: "Fire Hawks", event: "Domination Cup", prize: "₹10,000" },
-  ];
+  // Track flipped cards on mobile/tablet by index (per tab)
+  const [flippedCards, setFlippedCards] = useState({
+    winners: {},
+    hall: {},
+  });
 
-  const hallOfFamers = [
-    { name: "Quantum", games: "LoL", title: "5x Champion" },
-    { name: "Blitz", games: "Dota 2", title: "MVP 2022" },
-    { name: "Shadow", games: "Valorant", title: "Kill Leader" },
-    { name: "Falcon", games: "CS:GO", title: "Clutch King" },
-  ];
+  const showcaseData = {
+    winners: [
+      {
+        name: "RogueX",
+        squad: "Alpha Squad",
+        event: "Crew Wars",
+        prize: "₹12,000",
+        members: ["Ace", "Blaze", "Shadow", "Viper"],
+      },
+      {
+        name: "NovaForce",
+        squad: "Fire Hawks",
+        event: "Domination Cup",
+        prize: "₹10,000",
+        members: ["Flame", "Sky", "Bolt", "Storm"],
+      },
+    ],
+    hall: [
+      {
+        name: "Shadow",
+        squad: "Phantom Legends",
+        games: "Valorant",
+        title: "Kill Leader",
+        members: ["Ghost", "Reaper", "Shade", "Specter"],
+      },
+      {
+        name: "Falcon",
+        squad: "Ghost Ops",
+        games: "CS:GO",
+        title: "Clutch Master",
+        members: ["Hawk", "Eagle", "Raven", "Owl"],
+      },
+    ],
+  };
+
+  // Toggle flip on mobile/tablet tap of the buttons
+  const toggleFlip = (index) => {
+    setFlippedCards((prev) => ({
+      ...prev,
+      [selectedTab]: {
+        ...prev[selectedTab],
+        [index]: !prev[selectedTab]?.[index],
+      },
+    }));
+  };
 
   return (
-    <div className="bg-gradient-to-br from-indigo-300 via-purple-300 to-pink-300 py-24 px-8">
-      <div className="max-w-7xl mx-auto text-center">
-        <h2 className="text-6xl font-serif font-bold text-gray-800 mb-16 drop-shadow-lg">
-          🎯 Showcase Spotlight
-        </h2>
-        <div className="flex justify-center gap-8 mb-14">
-          <button
-            onClick={() => setSelectedTab("winners")}
-            className={`px-8 py-4 rounded-full text-xl font-semibold transition transform shadow-xl hover:scale-110 hover:shadow-pink-500/40 ${
-              selectedTab === "winners"
-                ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white"
-                : "bg-white text-gray-800 hover:bg-gray-100"
-            }`}
-          >
-            🏆 Winners
-          </button>
-          <button
-            onClick={() => setSelectedTab("hall")}
-            className={`px-8 py-4 rounded-full text-xl font-semibold transition transform shadow-xl hover:scale-110 hover:shadow-pink-500/40 ${
-              selectedTab === "hall"
-                ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white"
-                : "bg-white text-gray-800 hover:bg-gray-100"
-            }`}
-          >
-            🎖️ Hall of Fame
-          </button>
-        </div>
+    <>
+      <style>{`
+        .flip-card {
+          perspective: 1500px;
+        }
+        .flip-inner {
+          transition: transform 0.8s ease;
+          transform-style: preserve-3d;
+          position: relative;
+          height: 100%;
+          border-radius: 1rem;
+        }
+        /* Desktop hover flip */
+        @media (hover: hover) and (pointer: fine) {
+          .flip-card:hover .flip-inner {
+            transform: rotateY(180deg);
+          }
+          /* On desktop, buttons are hidden */
+          .more-btn, .back-btn {
+            display: none;
+          }
+        }
+        /* Mobile flip if flipped class */
+        .flip-inner.flipped {
+          transform: rotateY(180deg);
+        }
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {(selectedTab === "winners" ? winners : hallOfFamers).map(
-            (item, idx) => (
-              <div
-                key={idx}
-                className="relative bg-white rounded-[2rem] p-10 shadow-2xl border border-gray-200 transform transition duration-500 hover:scale-110 hover:rotate-[2deg] hover:shadow-[0_20px_40px_rgba(0,0,0,0.2)] backdrop-blur-md backdrop-saturate-200"
-                style={{ perspective: "1500px" }}
+        .flip-front,
+        .flip-back {
+          backface-visibility: hidden;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border-radius: 1rem;
+          padding: 2rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          box-sizing: border-box;
+          user-select: none;
+        }
+        .flip-back {
+          transform: rotateY(180deg);
+          background-color: #ea580c; /* orange-600 */
+          color: black;
+          text-align: center;
+          position: relative;
+        }
+
+        .glow-card {
+          background: white;
+          border: 2px solid #ea580c; /* orange-600 */
+          box-shadow: 
+            0 4px 10px rgba(234, 88, 12, 0.4),
+            inset 0 0 10px rgba(234, 88, 12, 0.1);
+          transition: all 0.4s ease;
+          height: 100%;
+          cursor: default;
+          will-change: transform;
+        }
+        .glow-card:hover {
+          box-shadow: 
+            0 8px 24px rgba(234, 88, 12, 0.6),
+            inset 0 0 14px rgba(234, 88, 12, 0.15);
+          transform: scale(1.03) rotateX(2deg) rotateY(2deg);
+          cursor: pointer;
+        }
+
+        .member-list {
+          margin-top: 1rem;
+          display: flex;
+          justify-content: center;
+          gap: 1.2rem;
+          flex-wrap: wrap;
+        }
+        .member {
+          background: rgba(0,0,0,0.05);
+          border-radius: 9999px;
+          padding: 0.4rem 1rem;
+          font-weight: 600;
+          font-size: 1rem;
+          color: black;
+          box-shadow: 0 0 6px rgba(234, 88, 12, 0.7);
+        }
+
+        /* Buttons */
+        .more-btn, .back-btn {
+          margin-top: 1.8rem;
+          background-color: #ea580c;
+          border: none;
+          color: black;
+          font-weight: 700;
+          padding: 0.6rem 1.4rem;
+          font-size: 1rem;
+          border-radius: 9999px;
+          box-shadow: 0 0 12px rgba(234, 88, 12, 0.7);
+          cursor: pointer;
+          align-self: center;
+          user-select: none;
+          transition: background-color 0.3s ease;
+        }
+        .more-btn:hover, .back-btn:hover {
+          background-color: #c24400;
+          color: white;
+        }
+
+        /* Responsive tweaks */
+        @media (max-width: 640px) {
+          .flip-front, .flip-back {
+            padding: 1.5rem;
+          }
+          .flip-front h3 {
+            font-size: 1.8rem;
+          }
+          .flip-back h4 {
+            font-size: 1.5rem;
+          }
+          .flip-back p {
+            font-size: 2rem;
+          }
+          .member {
+            font-size: 0.9rem;
+            padding: 0.3rem 0.8rem;
+          }
+          /* On mobile, make card cursor default except buttons */
+          .glow-card {
+            cursor: default;
+          }
+        }
+      `}</style>
+
+      <section className="min-h-screen py-20 px-4 bg-white">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-12">
+            🎯 Showcase Spotlight
+          </h2>
+
+          {/* Tabs */}
+          <div className="flex justify-center mb-10 flex-wrap gap-3">
+            {["winners", "hall"].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setSelectedTab(tab)}
+                className={`px-6 py-2 rounded-full text-lg font-semibold transition-all duration-300 ${
+                  selectedTab === tab
+                    ? "bg-orange-600 text-white shadow-md"
+                    : "bg-gray-100 text-gray-800 hover:bg-gray-200"
+                }`}
               >
+                {tab === "winners" ? "🏆 Winners" : "🎖️ Hall of Fame"}
+              </button>
+            ))}
+          </div>
+
+          {/* Flip Cards */}
+          <div
+            className="grid grid-cols-1 sm:grid-cols-2 gap-10 px-4"
+            style={{ minHeight: "288px" }}
+          >
+            {showcaseData[selectedTab].map((item, index) => {
+              const isFlipped = flippedCards[selectedTab]?.[index] || false;
+
+              return (
                 <div
-                  className="transform transition-transform duration-500 hover:rotate-y-[10deg] hover:-rotate-x-[3deg]"
-                  style={{ transformStyle: "preserve-3d" }}
+                  key={index}
+                  className="flip-card w-full max-w-md mx-auto h-72"
+                  aria-label={`${item.name} card`}
                 >
-                  <div className="text-left">
-                    <h3 className="text-4xl font-extrabold mb-4 text-purple-800 drop-shadow-md">
-                      {item.name}
-                    </h3>
-                    <p className="text-gray-700 text-lg">
-                      {selectedTab === "winners"
-                        ? `Event: ${item.event}`
-                        : `Games: ${item.games}`}
-                    </p>
-                    <p className="text-gray-900 font-bold mt-4 text-xl">
-                      {selectedTab === "winners"
-                        ? `Prize: ${item.prize}`
-                        : `Title: ${item.title}`}
-                    </p>
+                  <div
+                    className={`flip-inner glow-card rounded-xl ${
+                      isFlipped ? "flipped" : ""
+                    }`}
+                  >
+                    {/* Front */}
+                    <div className="flip-front text-gray-800">
+                      <h3 className="text-3xl font-bold mb-2">{item.name}</h3>
+                      <p className="text-lg text-gray-700">
+                        {selectedTab === "winners"
+                          ? `Event: ${item.event}`
+                          : `Game: ${item.games}`}
+                      </p>
+                      <div className="mt-5">
+                        <span className="inline-block text-xl bg-gray-100 text-black font-semibold px-5 py-3 rounded-full shadow-sm">
+                          {selectedTab === "winners" ? item.prize : item.title}
+                        </span>
+                      </div>
+                      <p className="text-sm mt-6 text-gray-400">
+                        Hover (desktop) / Tap More (mobile) to view Squad →
+                      </p>
+                      {/* More button on mobile/tablet */}
+                      <button
+                        className="more-btn"
+                        onClick={() => toggleFlip(index)}
+                        aria-label={`Show squad details for ${item.name}`}
+                        type="button"
+                      >
+                        More
+                      </button>
+                    </div>
+
+                    {/* Back */}
+                    <div className="flip-back">
+                      <h4 className="text-2xl font-bold mb-4">Squad</h4>
+                      <p className="text-3xl font-extrabold">{item.squad}</p>
+
+                      <div className="member-list">
+                        {item.members.map((m, i) => (
+                          <span key={i} className="member">
+                            {m}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Back button on mobile/tablet */}
+                      <button
+                        className="back-btn"
+                        onClick={() => toggleFlip(index)}
+                        aria-label={`Hide squad details for ${item.name}`}
+                        type="button"
+                      >
+                        Back
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )
-          )}
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </>
   );
 };
 

@@ -4,7 +4,8 @@ import { useInView } from "react-intersection-observer";
 import MainContainer from "../MainContainer/MainContainer";
 import slide01 from "../../assets/sk.jpeg";
 import slide02 from "../../assets/g.jpg";
-import slide03 from "../../assets/ff-logo.png";
+import slide03 from "../../assets/ff.png";
+import slide05 from "../../assets/bgm.png";
 import slide04 from "../../assets/bg.jpg";
 
 const Home = () => {
@@ -21,28 +22,30 @@ const Home = () => {
   });
 
   return (
-    <div className="pt-16  min-h-screen space-y-24">
+    <div className="pt-16 min-h-screen space-y-24 bg-white text-gray-900">
       <MainContainer />
+
       {/* Hero Section */}
-      <section className="relative bg-black text-white min-h-[80vh] flex items-center justify-center px-6 overflow-hidden">
+      <section className="relative bg-white text-gray-900 min-h-[80vh] flex items-center justify-center px-6 overflow-hidden">
         <img
           src={slide04}
           alt="Hero Background"
-          className="absolute inset-0 w-full h-full object-cover opacity-50"
+          className="absolute inset-0 w-full h-full object-cover opacity-30"
         />
         <div className="relative z-10 text-center max-w-3xl">
           <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-4 drop-shadow-lg">
             Dive Into the Arena
           </h1>
-          <p className="text-lg text-gray-200 mb-6">
+          <p className="text-lg text-gray-700 mb-6">
             Tactical Titans brings esports battles, legendary gamers, and
             unmissable moments.
           </p>
-          <button className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-lg text-lg shadow-lg transition">
+          <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg text-lg shadow-lg transition">
             Join the Battle
           </button>
         </div>
       </section>
+
       {/* Features Section */}
       <section className="grid md:grid-cols-3 gap-8 px-4 py-16 container mx-auto">
         {[
@@ -76,15 +79,13 @@ const Home = () => {
           </div>
         ))}
       </section>
+
       {/* Stats Section */}
-      <section
-        ref={ref}
-        className="bg-gradient-to-r from-gray-900 to-black text-white py-16"
-      >
+      <section ref={ref} className="bg-gray-100 text-gray-900 py-16">
         <div className="container mx-auto grid md:grid-cols-4 gap-8 text-center">
           {stats.map((item, idx) => (
             <div key={idx} className="text-3xl font-bold">
-              <div className="text-pink-500 text-5xl mb-2">
+              <div className="text-orange-500 text-5xl mb-2">
                 {inView ? (
                   <CountUp end={item.number} duration={2.5} separator="," />
                 ) : (
@@ -92,11 +93,12 @@ const Home = () => {
                 )}
                 {item.suffix}
               </div>
-              <div className="text-gray-300">{item.label}</div>
+              <div className="text-gray-700">{item.label}</div>
             </div>
           ))}
         </div>
       </section>
+
       {/* Streamer Spotlight Section */}
       <section className="bg-white py-20 px-4">
         <div className="container mx-auto flex flex-col md:flex-row items-center gap-12">
@@ -108,14 +110,14 @@ const Home = () => {
           <div className="md:w-1/2">
             <h2 className="text-3xl font-bold mb-4 text-gray-900">
               Meet the Legends:{" "}
-              <span className="text-pink-500">ShadowStrike</span>
+              <span className="text-orange-500">ShadowStrike</span>
             </h2>
             <p className="text-gray-700 mb-6">
               With over 10 million views, ShadowStrike has become a symbol of
               clutch plays and crowd-pleasing finishes. Watch live streams and
               exclusive behind-the-scenes.
             </p>
-            <button className="bg-black text-white px-5 py-3 rounded hover:bg-gray-800 transition">
+            <button className="bg-orange-500 text-white px-5 py-3 rounded hover:bg-orange-600 transition">
               Watch Now
             </button>
           </div>
@@ -123,7 +125,7 @@ const Home = () => {
       </section>
 
       {/* Tournament Rules Section */}
-      <section className="bg-gradient-to-br from-pink-50 to-pink-100 py-20 px-6">
+      <section className="bg-gradient-to-br from-orange-50 to-orange-100 py-20 px-6">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-4xl font-extrabold text-gray-900 mb-12 drop-shadow-lg">
             🛡️ Tournament Rules
@@ -139,14 +141,14 @@ const Home = () => {
             ].map((rule, idx) => (
               <div
                 key={idx}
-                className="relative bg-white p-6 rounded-2xl shadow-2xl transform transition duration-500 hover:rotate-y-6 hover:scale-105 hover:shadow-pink-400"
+                className="relative bg-white p-6 rounded-2xl shadow-2xl transform transition duration-500 hover:rotate-y-6 hover:scale-105 hover:shadow-orange-400"
                 style={{
                   transformStyle: "preserve-3d",
                   perspective: "1000px",
                 }}
               >
                 <div className="text-left">
-                  <h3 className="text-xl font-bold text-pink-600 mb-2">
+                  <h3 className="text-xl font-bold text-orange-600 mb-2">
                     Rule {idx + 1}
                   </h3>
                   <p className="text-gray-700">{rule}</p>
@@ -190,18 +192,19 @@ const Home = () => {
                 className="w-16 h-16 rounded-full mx-auto mb-4"
               />
               <p className="italic text-gray-600">"{t.text}"</p>
-              <p className="mt-4 font-semibold text-pink-500">{t.name}</p>
+              <p className="mt-4 font-semibold text-orange-500">{t.name}</p>
             </div>
           ))}
         </div>
       </section>
+
       {/* Sponsors Section */}
-      <section className="bg-black py-16">
-        <h2 className="text-3xl text-white font-bold text-center mb-12">
+      <section className="bg-gray-900 py-16">
+        <h2 className="text-3xl text-orange-600 font-bold text-center mb-12">
           Powered By
         </h2>
         <div className="flex flex-wrap justify-center gap-10 items-center px-4">
-          {[slide03, slide03, slide03].map((logo, idx) => (
+          {[slide05, slide03].map((logo, idx) => (
             <img
               key={idx}
               src={logo}
@@ -211,8 +214,9 @@ const Home = () => {
           ))}
         </div>
       </section>
+
       {/* Call To Action */}
-      <section className="bg-pink-600 text-white text-center py-20 px-6 rounded-t-[3rem]">
+      <section className="bg-orange-600 text-white text-center py-20 px-6 rounded-t-[3rem]">
         <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
           Ready to Rise?
         </h2>

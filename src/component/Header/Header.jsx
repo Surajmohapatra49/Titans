@@ -9,8 +9,8 @@ const Header = () => {
 
   const isActive = (path) => {
     return location.pathname === path
-      ? "text-pink-500 border-b-2 border-pink-500 neon-text"
-      : "hover:text-pink-400 transition duration-300";
+      ? "text-orange-600 border-b-2 border-orange-600 neon-text"
+      : "hover:text-orange-600 transition duration-300";
   };
 
   const toggleMobileMenu = () => {
@@ -31,14 +31,14 @@ const Header = () => {
           onClick={closeMobileMenu}
         >
           <img src={logo} alt="Logo" className="h-10 w-auto object-contain" />
-          <span className="text-xl font-extrabold text-pink-500 neon-text">
+          <span className="text-2xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r  from-orange-600 to-indigo-500">
             Tactical Titans
           </span>
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex">
-          <ul className="flex space-x-6 text-sm font-semibold">
+          <ul className="flex space-x-6 text-base font-bold">
             {navItems.map(({ label, path }) => (
               <li key={path}>
                 <Link to={path} className={`px-2 py-1 ${isActive(path)}`}>
@@ -67,7 +67,7 @@ const Header = () => {
       {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && (
         <div className="md:hidden bg-white shadow-lg border-t border-gray-200">
-          <ul className="flex flex-col text-sm font-semibold px-6 py-4 space-y-4">
+          <ul className="flex flex-col text-base font-bold px-6 py-4 space-y-4">
             {navItems.map(({ label, path }) => (
               <li key={path}>
                 <Link
