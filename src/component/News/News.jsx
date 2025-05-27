@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { X } from "lucide-react";
-import slide10 from "../../assets/g.jpg";
+import slide10 from "../../assets/news.jpeg";
 
 const News = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,11 +23,11 @@ const News = () => {
       >
         <img src={slide10} alt="WCG 2025" className="rounded-lg mb-4" />
         <h2 className="font-semibold text-lg text-gray-800 mb-2">
-          WCG 2025 Announces Natio...
+          TTG 2025 Launches ...
         </h2>
         <p className="text-gray-600 font-medium text-sm">
-          WCG 2025 Announces National Showdown India in Collaboration with
-          Upthrust...
+          National Showdown India’ in Collaboration with Tactical Titans to
+          Redefine Competitive Gaming...
         </p>
         <p className="text-gray-500 text-xs mt-2">April 21st, 2025</p>
       </div>
@@ -44,24 +44,24 @@ const News = () => {
             </button>
 
             <h3 className="text-xl font-bold text-gray-800 mb-4">
-              WCG 2025 Announces National Showdown India in Collaboration with
-              Upthrust Esports
+              TTG 2025 Launches National Showdown India’ in Collaboration with
+              Tactical Titans to Redefine Competitive Gaming...
             </h3>
 
             <img src={slide10} alt="WCG Poster" className="rounded-lg mb-4" />
 
             <p className="text-gray-700">
-              WCG 2025 is bringing the heat to India with a national showdown
-              featuring the best teams across the country in partnership with
-              Upthrust Esports.
+              TTG 2025 and Tactical Titans Unleash ‘National Showdown India’ — A
+              New Era of Competitive Gaming Begins.
               {readMore && (
                 <>
                   {" "}
-                  The event promises top-tier production, thrilling gameplay,
-                  and unprecedented opportunities for rising stars. This
-                  collaboration signals a huge step forward for India's esports
-                  ecosystem and represents the next big leap for regional
-                  gamers.
+                  TTG 2025 is not just an event — it’s a movement. Designed to
+                  empower every Indian gamer’s dream, this year’s edition brings
+                  together cutting-edge competition and national pride. In
+                  collaboration with Tactical Titans Esports, National Showdown
+                  India will unite the country’s top talent and rising stars
+                  under one electrifying platform.
                 </>
               )}
             </p>

@@ -12,34 +12,27 @@ const ClassicShowcaseSection = () => {
   const showcaseData = {
     winners: [
       {
-        name: "RogueX",
+        name: "BGMI",
         squad: "Alpha Squad",
-        event: "Crew Wars",
-        prize: "₹12,000",
-        members: ["Ace", "Blaze", "Shadow", "Viper"],
+        event: "BGMI ProStrike Series",
+        prize: "₹8,000",
+        members: ["honeybadger", "Steve", "AlexTr2A", "Asakhelijiba"],
       },
       {
-        name: "NovaForce",
+        name: "Free Fire",
         squad: "Fire Hawks",
-        event: "Domination Cup",
-        prize: "₹10,000",
-        members: ["Flame", "Sky", "Bolt", "Storm"],
+        event: "Zone Rush Champions",
+        prize: "₹4,000",
+        members: ["Sibu", "Sky", "Bolt", "Storm"],
       },
     ],
     hall: [
       {
         name: "Shadow",
         squad: "Phantom Legends",
-        games: "Valorant",
+        games: "BGMI ProStrike Series",
         title: "Kill Leader",
         members: ["Ghost", "Reaper", "Shade", "Specter"],
-      },
-      {
-        name: "Falcon",
-        squad: "Ghost Ops",
-        games: "CS:GO",
-        title: "Clutch Master",
-        members: ["Hawk", "Eagle", "Raven", "Owl"],
       },
     ],
   };
@@ -257,9 +250,7 @@ const ClassicShowcaseSection = () => {
                           {selectedTab === "winners" ? item.prize : item.title}
                         </span>
                       </div>
-                      <p className="text-sm mt-6 text-gray-400">
-                        Hover (desktop) / Tap More (mobile) to view Squad →
-                      </p>
+                      <p className="text-sm mt-6 text-gray-400">→</p>
                       {/* More button on mobile/tablet */}
                       <button
                         className="more-btn"

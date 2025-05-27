@@ -3,7 +3,7 @@ import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import MainContainer from "../MainContainer/MainContainer";
 import slide01 from "../../assets/sk.jpeg";
-import slide02 from "../../assets/g.jpg";
+import slide02 from "../../assets/live.jpeg";
 import slide03 from "../../assets/ff.png";
 import slide05 from "../../assets/bgm.png";
 import slide04 from "../../assets/bg.jpg";
@@ -33,7 +33,7 @@ const Home = () => {
           className="absolute inset-0 w-full h-full object-cover opacity-30"
         />
         <div className="relative z-10 text-center max-w-3xl">
-          <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-4 drop-shadow-lg">
+          <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-4 ">
             Dive Into the Arena
           </h1>
           <p className="text-lg text-gray-700 mb-6">
@@ -113,8 +113,8 @@ const Home = () => {
               <span className="text-orange-500">ShadowStrike</span>
             </h2>
             <p className="text-gray-700 mb-6">
-              With over 10 million views, ShadowStrike has become a symbol of
-              clutch plays and crowd-pleasing finishes. Watch live streams and
+              With over 1K+ views, ShadowStrike has become a symbol of clutch
+              plays and crowd-pleasing finishes. Watch live streams and
               exclusive behind-the-scenes.
             </p>
             <button className="bg-orange-500 text-white px-5 py-3 rounded hover:bg-orange-600 transition">
@@ -132,11 +132,11 @@ const Home = () => {
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              "Each team must consist of 4 to 6 players.",
+              "Each team must consist  4 players.",
+              "Each team must register 2 hours before the game",
               "No use of third-party cheats or hacks is allowed.",
               "Respectful behavior toward opponents and organizers is mandatory.",
               "Matches must start within 5 minutes of the scheduled time.",
-              "Disputes must be reported within 15 minutes of match end.",
               "Failure to follow rules may result in disqualification.",
             ].map((rule, idx) => (
               <div

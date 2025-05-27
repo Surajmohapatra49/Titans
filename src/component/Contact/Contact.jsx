@@ -1,6 +1,6 @@
 import React from "react";
 import { MapPin, Phone, Mail } from "lucide-react";
-import Logo from "../../assets/logo.png";
+import Logo from "../../assets/lg.png";
 
 const Contact = () => {
   return (
@@ -36,14 +36,14 @@ const Contact = () => {
             <ContactInfo
               icon={<MapPin className="text-orange-600" />}
               label="Our Address"
-              value="134, Sector 20, Kharghar, Navi Mumbai, Maharashtra 410210"
+              value=" Sector 07, CDA , Odisha, Cuttack 753012"
             />
             <ContactInfo
               icon={<Phone className="text-orange-600" />}
               label="Contact"
               value={
                 <>
-                  Mobile: +91 9815008815 <br />
+                  {/* Mobile: +91  <br /> */}
                   Email:{" "}
                   <a
                     href="mailto:Tacticaltitans127@gmail.com"

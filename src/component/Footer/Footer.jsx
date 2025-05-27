@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/lg.png";
 import { Facebook, Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
 
 const Footer = () => {
@@ -18,7 +18,7 @@ const Footer = () => {
           </div>
 
           <p className="text-base text-gray-600 mb-8 max-w-md leading-relaxed mx-auto md:mx-0">
-            Ready to elevate your esports experience? Whether you need expert
+            Ready to elevate your sports experience? Whether you need expert
             production, dynamic marketing..
           </p>
 
@@ -90,7 +90,7 @@ const Footer = () => {
 
       {/* Bottom copyright */}
       <div className="relative z-10 mt-8 pt-4 text-sm text-center text-gray-400 px-4">
-        &copy; 2025 Tactical Titans. All Rights Reserved.
+        Copyright &copy; 2025 Tactical Titans.
       </div>
     </footer>
   );

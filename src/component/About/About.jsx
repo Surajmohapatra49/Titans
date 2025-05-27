@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Flame, Trophy, Smile, Globe, ShieldCheck, Star } from "lucide-react";
-import aboutHeroImg from "../../assets/logo.png";
+import aboutHeroImg from "../../assets/lll.png";
 import rajeshImg from "../../assets/a.jpg";
 import surajImg from "../../assets/b.jpg";
 import sandeepImg from "../../assets/c.jpg";
@@ -70,8 +70,12 @@ const About = () => {
               Titans Gaming: Elevating Indian Esports
             </h1>
             <p className="text-lg text-gray-600">
-              Since 2015, Titans Gaming has been pioneering a new standard in
-              the competitive gaming scene in India.
+              Since 2025, Tactical Titans Gaming has been at the forefront of
+              India’s competitive gaming evolution — setting new standards,
+              breaking boundaries, and turning gamers’ dreams into reality. With
+              a mission to empower talent and elevate the esports experience,
+              Titans continues to shape a future where passion meets
+              performance.
             </p>
           </div>
           <img
