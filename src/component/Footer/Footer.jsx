@@ -36,7 +36,7 @@ const Footer = () => {
             )}
           </div>
 
-          <div className="flex flex-wrap justify-center md:justify-start gap-6 text-sm font-medium text-gray-600">
+          {/* <div className="flex flex-wrap justify-center md:justify-start gap-6 text-sm font-medium text-gray-600">
             {[
               "Home",
               "Tournaments",
@@ -54,7 +54,7 @@ const Footer = () => {
                 {label}
               </a>
             ))}
-          </div>
+          </div> */}
         </div>
 
         {/* Right section: Contact Form */}

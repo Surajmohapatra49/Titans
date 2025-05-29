@@ -25,24 +25,38 @@ const Home = () => {
     <div className="pt-16 min-h-screen space-y-24 bg-white text-gray-900">
       <MainContainer />
 
-      {/* Hero Section */}
-      <section className="relative bg-white text-gray-900 min-h-[80vh] flex items-center justify-center px-6 overflow-hidden">
-        <img
-          src={slide04}
-          alt="Hero Background"
-          className="absolute inset-0 w-full h-full object-cover opacity-30"
-        />
-        <div className="relative z-10 text-center max-w-3xl">
-          <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-4 ">
+      {/* Hero Section with Video */}
+      <section className="relative min-h-[80vh] flex items-center justify-center px-6 overflow-hidden">
+        <video
+          autoPlay
+          loop
+          muted
+          className="absolute inset-0 w-full h-full object-cover opacity-60 z-0"
+        >
+          <source src="/aaa.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div className="relative z-10 text-center max-w-3xl text-white">
+          <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-4">
             Dive Into the Arena
           </h1>
-          <p className="text-lg text-gray-700 mb-6">
+          <p className="text-lg mb-6">
             Tactical Titans brings esports battles, legendary gamers, and
             unmissable moments.
           </p>
-          <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg text-lg shadow-lg transition">
+          <a
+            href="intent://launch#Intent;scheme=bgmi;package=com.pubg.imobile;end"
+            onClick={() =>
+              setTimeout(() => {
+                alert(
+                  "If the game didn't open, please install BGMI from the Play Store."
+                );
+              }, 1500)
+            }
+            className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg text-lg shadow-lg transition inline-block"
+          >
             Join the Battle
-          </button>
+          </a>
         </div>
       </section>
 
