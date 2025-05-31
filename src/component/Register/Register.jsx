@@ -1,5 +1,5 @@
 import React from "react";
-import eventImage from "../../assets/register.jpeg"; // Replace with your image path
+import eventImage from "../../assets/register.jpeg";
 
 const Register = () => {
   const handleRegisterClick = () => {
@@ -7,20 +7,20 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white relative overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-8 lg:px-20 py-10 sm:py-16">
+    <div className="min-h-screen bg-white">
+      {/* ✅ Foreground Content */}
+      <div className="container mx-auto px-6 sm:px-8 lg:px-25 py-10 sm:py-16">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto px-4">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-orange-600 leading-tight">
             Register for Events
           </h1>
-          <div className="mt-3 w-16 sm:w-20 h-1 bg-orange-600 mx-auto rounded-full" />
+          <div className="mt-5 w-16 sm:w-20 h-1 bg-orange-600 mx-auto rounded-full" />
         </div>
 
         {/* Event Card */}
         <div className="mt-10 flex justify-left px-2 sm:px-6">
           <div className="bg-orange-50 rounded-2xl p-4 sm:p-6 max-w-sm w-full shadow-lg">
-            {/* Image */}
             <img
               src={eventImage}
               alt="Tactical Titans Crew War"
