@@ -9,6 +9,7 @@ import slide05 from "../../assets/bgm.png";
 import slide04 from "../../assets/bg.jpg";
 import slide06 from "../../assets/cc.png";
 import liveVideo from "../../assets/live.mp4";
+import lvImage from "../../assets/lv.jpg";
 
 const Home = () => {
   const stats = [
@@ -40,7 +41,7 @@ const Home = () => {
           controlsList="nodownload nofullscreen noremoteplayback"
           className="absolute inset-0 w-full h-full object-cover z-0"
         >
-          <source src="/we.mp4" type="video/mp4" />
+          <source src="/we.mp4 " type="video/mp4" />
           Your browser does not support the video tag.
         </video>
 
@@ -185,12 +186,9 @@ const Home = () => {
       {/* Streamer Spotlight Section */}
       <section className="bg-white py-20 px-4">
         <div className="container mx-auto flex flex-col md:flex-row items-center gap-12">
-          <video
-            src={liveVideo}
-            autoPlay
-            muted
-            loop
-            playsInline
+          <img
+            src={lvImage}
+            alt="Live Legend"
             className="w-full md:w-1/2 rounded-3xl shadow-xl object-cover"
           />
           <div className="md:w-1/2">
