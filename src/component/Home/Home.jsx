@@ -2,14 +2,17 @@ import React from "react";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import MainContainer from "../MainContainer/MainContainer";
-import slide01 from "../../assets/sk.jpeg";
-import slide02 from "../../assets/live.jpeg";
-import slide03 from "../../assets/ff.png";
-import slide05 from "../../assets/bgm.png";
+import slide01 from "../../assets/live.jpg";
+import slide02 from "../../assets/live.jpg";
+import slide03 from "../../assets/ff.jpg";
+import slide05 from "../../assets/bgmi.png";
 import slide04 from "../../assets/bg.jpg";
 import slide06 from "../../assets/cc.png";
-import liveVideo from "../../assets/live.mp4";
 import lvImage from "../../assets/lv.jpg";
+
+import slide51 from "../../assets/p1.jpg";
+import slide52 from "../../assets/pf.jpg";
+import slide53 from "../../assets/p3.jpg";
 
 const Home = () => {
   const stats = [
@@ -202,7 +205,7 @@ const Home = () => {
               exclusive behind-the-scenes.
             </p>
             <button className="bg-orange-500 text-white px-5 py-3 rounded hover:bg-orange-600 transition">
-              Watch Now
+              Coming Soon..
             </button>
           </div>
         </div>
@@ -254,39 +257,81 @@ const Home = () => {
             {
               name: "Jasmin",
               text: "The best competitive scene. Every match feels like a final!",
-              img: slide01,
+              img: slide51,
               neonColor: "text-pink-500",
               glow: "0 0 6px #ec4899, 0 0 12px #ec4899",
             },
             {
               name: "Sourav",
               text: "Tactical Titans gave me my first break as a streamer.",
-              img: slide01,
+              img: slide52,
               neonColor: "text-cyan-400",
               glow: "0 0 6px #22d3ee, 0 0 12px #22d3ee",
             },
             {
               name: "Sibu Ranjan",
               text: "Tournaments are lit! They’re fair, fast, and super fun.",
-              img: slide01,
+              img: slide53,
               neonColor: "text-violet-500",
               glow: "0 0 6px #8b5cf6, 0 0 12px #8b5cf6",
             },
           ].map((t, i) => (
-            <div key={i} className="group perspective">
+            <div key={i} className="group" style={{ perspective: "1000px" }}>
               <div className="relative flex flex-col justify-between bg-neutral-900 text-white rounded-3xl p-6 shadow-xl transform transition-transform duration-700 group-hover:scale-105 hover:shadow-red-400/40 border border-white/10 overflow-hidden min-h-[220px]">
                 {/* Background Shine */}
                 <div className="absolute inset-0 bg-gradient-to-br from-transparent via-rose-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 animate-pulse pointer-events-none rounded-3xl" />
 
                 {/* Header */}
                 <div className="flex items-center space-x-4 mb-4">
-                  <div className="w-16 h-16 relative">
-                    <img
-                      src={t.img}
-                      alt={t.name}
-                      className="rounded-full border-4 border-rose-500 shadow-md object-cover w-full h-full"
-                    />
-                    <div className="absolute inset-0 rounded-full border border-white/10 backdrop-blur-sm"></div>
+                  {/* Flip Image */}
+                  <div
+                    className="w-16 h-16"
+                    style={{
+                      perspective: "1000px",
+                    }}
+                  >
+                    <div
+                      className="relative w-full h-full transition-transform duration-700 group-hover:rotate-y-180"
+                      style={{
+                        transformStyle: "preserve-3d",
+                      }}
+                    >
+                      {/* Front Side */}
+                      <div
+                        className="absolute inset-0 rounded-full overflow-hidden border-4 border-rose-500 shadow-md"
+                        style={{
+                          backfaceVisibility: "hidden",
+                        }}
+                      >
+                        <img
+                          src={t.img}
+                          alt={t.name}
+                          className="w-full h-full object-cover"
+                          style={{
+                            filter: "blur(2px)",
+                            transform: "scale(1.05)",
+                          }}
+                        />
+                      </div>
+
+                      {/* Back Side */}
+                      <div
+                        className="absolute inset-0 rounded-full overflow-hidden border-4 border-rose-500 shadow-md"
+                        style={{
+                          transform: "rotateY(180deg)",
+                          backfaceVisibility: "hidden",
+                          position: "absolute",
+                          top: 0,
+                          left: 0,
+                        }}
+                      >
+                        <img
+                          src={t.img}
+                          alt={`${t.name} clear`}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </div>
                   </div>
 
                   {/* Neon Name */}

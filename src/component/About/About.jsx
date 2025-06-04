@@ -2,9 +2,9 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Flame, Trophy, Smile, Globe, ShieldCheck, Star } from "lucide-react";
 import aboutHeroImg from "../../assets/lll.png";
-import rajeshImg from "../../assets/a.jpg";
-import surajImg from "../../assets/b.jpg";
-import sandeepImg from "../../assets/c.jpg";
+import rajeshImg from "../../assets/rajesh.jpg";
+import surajImg from "../../assets/sandeep.jpg";
+import sandeepImg from "../../assets/suraj.jpg";
 
 const fadeIn = (delay = 0) => ({
   hidden: { opacity: 0, y: 20 },
@@ -49,8 +49,8 @@ const highlights = [
 
 const team = [
   { name: "Rajesh", role: "Founder & CEO", img: rajeshImg },
-  { name: "Sandeep & Tanmay", role: "Tournament Directors", img: surajImg },
   { name: "Suraj", role: "Community Manager", img: sandeepImg },
+  { name: "Tanmay", role: "Tournament Directors", img: surajImg },
 ];
 
 const About = () => {
@@ -81,7 +81,7 @@ const About = () => {
           <img
             src={aboutHeroImg}
             alt="About Titans Gaming"
-            className="w-full md:w-1/2 max-w-xs sm:max-w-sm rounded-2xl shadow-lg"
+            className="w-full md:w-1/2 max-w-xs sm:max-w-sm rounded-2xl shadow-lg md:ml-20"
           />
         </motion.div>
 

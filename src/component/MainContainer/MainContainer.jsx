@@ -6,13 +6,13 @@ import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 
 // Desktop slides (10)
-import slide1 from "../../assets/a.jpg";
-import slide2 from "../../assets/b.jpg";
-import slide3 from "../../assets/c.jpg";
-import slide4 from "../../assets/d.jpg";
-import slide5 from "../../assets/e.jpeg";
-import slide6 from "../../assets/f.jpg";
-// import slide7 from "../../assets/g.jpg";
+import slide1 from "../../assets/pc1.png";
+import slide2 from "../../assets/pc2.png";
+import slide3 from "../../assets/pc3.png";
+import slide4 from "../../assets/pc4.png";
+import slide5 from "../../assets/pc5.png";
+import slide6 from "../../assets/pc6.png";
+import slide7 from "../../assets/pc7.png";
 // import slide8 from "../../assets/h.jpg";
 // import slide9 from "../../assets/i.jpg";
 // import slide10 from "../../assets/j.jpg";
@@ -30,7 +30,7 @@ import mobile4 from "../../assets/m4.jpeg";
 // import mobile10 from "../../assets/m10.jpg";
 
 // Background image
-import bgVideo from "../../assets/nwb.jpg";
+import bgImage from "../../assets/bg.jpg";
 
 const MainContainer = () => {
   const [current, setCurrent] = useState(0);
@@ -43,7 +43,7 @@ const MainContainer = () => {
     slide4,
     slide5,
     slide6,
-    // slide7,
+    slide7,
     // slide8,
     // slide9,
     // slide10,
@@ -81,7 +81,7 @@ const MainContainer = () => {
       {/* Background Image */}
       <div
         className="absolute inset-0 w-full h-full bg-cover bg-center z-0"
-        style={{ backgroundImage: `url(${bgVideo})` }}
+        style={{ backgroundImage: `url(${bgImage})` }}
       ></div>
 
       {/* Glass Effect */}
