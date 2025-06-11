@@ -33,17 +33,18 @@ const ClassicShowcaseSection = () => {
   };
 
   const toggleExpand = (index) => {
-    setExpandedCard(expandedCard === index ? null : index);
+    setExpandedCard((prev) => (prev === index ? null : index));
   };
 
   return (
-    <section className="min-h-screen py-20 px-6 bg-gradient-to-br from-orange-50 to-orange-100 text-gray-900">
+    <section className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-orange-40 via-white to-yellow-100 text-gray-900">
       <div className="max-w-7xl mx-auto text-center">
-        <h2 className="text-5xl font-extrabold text-orange-600 mb-16 drop-shadow-lg">
+        <h2 className="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r orange-600 via-pink-500 to-yellow-500 drop-shadow-md animate-pulse mb-16 tracking-tight">
           ✨ Showcase Spotlight
         </h2>
 
-        <div className="flex justify-center gap-6 mb-14 flex-wrap">
+        {/* Tabs */}
+        <div className="flex justify-center gap-4 sm:gap-6 mb-12 flex-wrap">
           {[
             { key: "winners", label: "🏆 Winners" },
             { key: "hall", label: "🎖️ Hall of Fame" },
@@ -54,41 +55,40 @@ const ClassicShowcaseSection = () => {
                 setSelectedTab(key);
                 setExpandedCard(null);
               }}
-              className={`px-8 py-3 rounded-full font-semibold text-lg transition-all duration-300 shadow-md ${
+              className={`px-6 sm:px-8 py-2 sm:py-3 rounded-full font-semibold text-lg transition-all duration-300 transform ${
                 selectedTab === key
-                  ? "bg-orange-600 text-white shadow-lg"
+                  ? "bg-gradient-to-r from-orange-500 to-pink-500 text-white scale-105 shadow-lg"
                   : "bg-white text-orange-600 border-2 border-orange-400 hover:bg-orange-100"
               }`}
-              aria-pressed={selectedTab === key}
             >
               {label}
             </button>
           ))}
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        {/* Cards */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {showcaseData[selectedTab].map((item, index) => {
             const isExpanded = expandedCard === index;
 
             return (
               <div
                 key={index}
-                className="relative bg-white rounded-3xl shadow-lg p-6 flex flex-col justify-center items-center cursor-default"
+                className="relative group bg-white rounded-3xl shadow-lg p-6 transition-transform duration-300 ease-in-out hover:scale-[1.02] hover:shadow-2xl overflow-hidden border-2 border-transparent hover:border-orange-400"
               >
-                {/* Main card content */}
-                <div className="flex flex-col justify-center items-center gap-4 min-h-[220px] w-full">
-                  <h3 className="text-3xl font-extrabold text-orange-700 mb-2">
+                <div className="flex flex-col gap-3 min-h-[220px]">
+                  <h3 className="text-2xl font-bold text-orange-700 group-hover:underline">
                     {item.name}
                   </h3>
-                  <p className="text-lg font-semibold">
+                  <p className="text-base font-semibold">
                     {selectedTab === "winners" ? "Event" : "Game"}:{" "}
-                    <span className="font-normal text-gray-700">
+                    <span className="font-normal">
                       {selectedTab === "winners" ? item.event : item.games}
                     </span>
                   </p>
-                  <p className="text-lg font-semibold">
+                  <p className="text-base font-semibold">
                     {selectedTab === "winners" ? "Prize" : "Title"}:{" "}
-                    <span className="font-normal text-gray-700">
+                    <span className="font-normal">
                       {selectedTab === "winners" ? item.prize : item.title}
                     </span>
                   </p>
@@ -97,37 +97,48 @@ const ClassicShowcaseSection = () => {
                   </p>
                   <button
                     onClick={() => toggleExpand(index)}
-                    className="mt-4 bg-orange-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-orange-700 transition-colors focus:outline-none focus:ring-4 focus:ring-orange-400"
+                    className="mt-3 bg-gradient-to-r from-pink-500 to-orange-500 text-white px-4 py-2 rounded-full font-semibold hover:scale-105 transition duration-200 shadow-md"
                   >
                     {isExpanded ? "Hide Details" : "More Details"}
                   </button>
                 </div>
 
-                {/* Details slide-down panel */}
+                {/* Dim background on card */}
+                {isExpanded && (
+                  <div className="absolute inset-0 bg-black/40 backdrop-blur-sm rounded-3xl z-10" />
+                )}
+
+                {/* Center Modal */}
                 <div
-                  className={`overflow-hidden rounded-b-3xl mt-6 bg-black text-white px-6 py-5 w-full transition-all duration-500 ease-in-out ${
-                    isExpanded ? "max-h-[500px]" : "max-h-0"
+                  className={`absolute top-1/2 left-1/2 w-80 sm:w-96 bg-gradient-to-br from-black via-gray-900 to-black text-white rounded-3xl p-6 shadow-2xl z-20 transition-all duration-500 ease-in-out transform ${
+                    isExpanded
+                      ? "translate-x-[-50%] translate-y-[-50%] opacity-100 scale-100"
+                      : "translate-x-[-50%] translate-y-[-50%] opacity-0 scale-95 pointer-events-none"
                   }`}
                 >
-                  <h4 className="text-2xl font-bold text-orange-500 mb-4">
-                    Squad Members
-                  </h4>
-                  <div className="flex flex-wrap gap-3 mb-4">
-                    {item.members.map((member, i) => (
-                      <span
-                        key={i}
-                        className="bg-orange-700 bg-opacity-80 rounded-full px-3 py-1 text-sm font-semibold"
-                      >
-                        {member}
-                      </span>
-                    ))}
+                  <div className="flex flex-col h-full justify-between gap-4">
+                    <div>
+                      <h4 className="text-xl font-bold text-yellow-400 mb-4 text-center animate-pulse">
+                        Squad Members
+                      </h4>
+                      <div className="flex flex-wrap gap-2 justify-center">
+                        {item.members.map((member, i) => (
+                          <span
+                            key={i}
+                            className="bg-orange-600 hover:bg-orange-500 transition text-white rounded-full px-3 py-1 text-sm font-medium shadow"
+                          >
+                            {member}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => setExpandedCard(null)}
+                      className="mt-6 bg-orange-800 hover:bg-orange-700 text-white font-bold py-2 px-6 rounded-full self-center transition duration-200 shadow-lg"
+                    >
+                      Close
+                    </button>
                   </div>
-                  <button
-                    onClick={() => setExpandedCard(null)}
-                    className="bg-orange-600 hover:bg-orange-700 transition-colors text-white font-bold py-2 px-6 rounded-full focus:outline-none focus:ring-4 focus:ring-orange-500"
-                  >
-                    Close
-                  </button>
                 </div>
               </div>
             );

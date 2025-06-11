@@ -4,7 +4,7 @@ import { useInView } from "react-intersection-observer";
 import MainContainer from "../MainContainer/MainContainer";
 import slide01 from "../../assets/live.jpg";
 import slide02 from "../../assets/live.jpg";
-import slide03 from "../../assets/ff.jpg";
+import slide03 from "../../assets/ff.png";
 import slide05 from "../../assets/bgmi.png";
 import slide04 from "../../assets/bg.jpg";
 import slide06 from "../../assets/cc.png";

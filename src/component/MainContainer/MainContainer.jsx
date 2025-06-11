@@ -5,7 +5,7 @@ import Tilt from "react-parallax-tilt";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 
-// Desktop slides (10)
+// Desktop slides
 import slide1 from "../../assets/pc1.png";
 import slide2 from "../../assets/pc2.png";
 import slide3 from "../../assets/pc3.png";
@@ -13,23 +13,15 @@ import slide4 from "../../assets/pc4.png";
 import slide5 from "../../assets/pc5.png";
 import slide6 from "../../assets/pc6.png";
 import slide7 from "../../assets/pc7.png";
-// import slide8 from "../../assets/h.jpg";
-// import slide9 from "../../assets/i.jpg";
-// import slide10 from "../../assets/j.jpg";
 
-// Mobile slides (10)
+// Mobile slides
 import mobile1 from "../../assets/m1.jpg";
 import mobile2 from "../../assets/m2.jpg";
 import mobile3 from "../../assets/m3.jpeg";
 import mobile4 from "../../assets/m4.jpeg";
-// import mobile5 from "../../assets/m5.jpg";
-// import mobile6 from "../../assets/m6.jpg";
-// import mobile7 from "../../assets/m7.jpg";
-// import mobile8 from "../../assets/m8.jpg";
-// import mobile9 from "../../assets/m9.jpg";
-// import mobile10 from "../../assets/m10.jpg";
+import mobile5 from "../../assets/m5.jpg";
 
-// Background image
+// Background
 import bgImage from "../../assets/bg.jpg";
 
 const MainContainer = () => {
@@ -44,24 +36,8 @@ const MainContainer = () => {
     slide5,
     slide6,
     slide7,
-    // slide8,
-    // slide9,
-    // slide10,
   ];
-
-  const mobileSlides = [
-    mobile1,
-    mobile2,
-    mobile3,
-    mobile4,
-    // mobile5,
-    // mobile6,
-    // mobile7,
-    // mobile8,
-    // mobile9,
-    // mobile10,
-  ];
-
+  const mobileSlides = [mobile1, mobile2, mobile3, mobile4, mobile5];
   const slides = isMobile ? mobileSlides : desktopSlides;
   const total = slides.length;
   const angle = 360 / total;
@@ -69,7 +45,7 @@ const MainContainer = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % total);
-    }, 6000);
+    }, 5000);
     return () => clearInterval(interval);
   }, [total]);
 
@@ -78,11 +54,11 @@ const MainContainer = () => {
 
   return (
     <div className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-black">
-      {/* Background Image */}
+      {/* Background */}
       <div
         className="absolute inset-0 w-full h-full bg-cover bg-center z-0"
         style={{ backgroundImage: `url(${bgImage})` }}
-      ></div>
+      />
 
       {/* Glass Effect */}
       <div
@@ -112,29 +88,27 @@ const MainContainer = () => {
         className="absolute inset-0 z-20"
       />
 
-      {/* Main Slide Content */}
+      {/* Main Content */}
       {isMobile ? (
         // ✅ Mobile View
-        <div
-          className="w-full h-full flex items-center justify-center z-30"
-          style={{ perspective: "1000px" }}
-        >
-          <div
-            className="w-[90%] h-[80%] transition-transform duration-[3000ms] ease-in-out rounded-xl shadow-2xl overflow-hidden"
-            style={{
-              transform: `rotateY(${current * 360}deg)`,
-              transformStyle: "preserve-3d",
-            }}
-          >
-            <img
-              src={slides[current]}
-              alt={`Mobile Slide ${current}`}
-              className="w-full h-full object-cover rounded-xl"
-            />
+        <div className="absolute inset-0 z-30 px-4">
+          {" "}
+          {/* Added horizontal margin */}
+          <div className="w-full h-full relative overflow-hidden rounded-xl">
+            {slides.map((slide, idx) => (
+              <img
+                key={idx}
+                src={slide}
+                alt={`Mobile Slide ${idx}`}
+                className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ${
+                  current === idx ? "opacity-100 z-20" : "opacity-0 z-10"
+                }`}
+              />
+            ))}
           </div>
         </div>
       ) : (
-        // ✅ Desktop View
+        // ✅ Desktop View (3D Carousel)
         <div
           className="relative w-[300px] h-[200px] sm:w-[420px] sm:h-[280px] z-30"
           style={{ perspective: "1200px" }}
@@ -174,7 +148,7 @@ const MainContainer = () => {
         </div>
       )}
 
-      {/* Navigation Buttons – shown on all screens */}
+      {/* Navigation */}
       <button
         onClick={goPrev}
         className="absolute left-6 top-1/2 -translate-y-1/2 z-40 p-3 bg-white/20 hover:bg-white/40 text-white transition-all rounded-full backdrop-blur"
@@ -182,7 +156,6 @@ const MainContainer = () => {
       >
         <ChevronLeft size={28} />
       </button>
-
       <button
         onClick={goNext}
         className="absolute right-6 top-1/2 -translate-y-1/2 z-40 p-3 bg-white/20 hover:bg-white/40 text-white transition-all rounded-full backdrop-blur"
@@ -191,8 +164,8 @@ const MainContainer = () => {
         <ChevronRight size={28} />
       </button>
 
-      {/* Dots (optional – desktop and mobile) */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-40">
+      {/* Dots – Only on non-mobile screens */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 gap-2 z-40 hidden sm:flex">
         {slides.map((_, idx) => (
           <button
             key={idx}
