@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom"; // <-- Import Link from react-router-dom
 import bgmiLogo from "../../assets/bgmi.png";
 import ffLogo from "../../assets/ff.svg";
 
@@ -89,16 +90,16 @@ const Tournaments = () => {
 
               {t.live && (
                 <div className="mt-3 space-y-3">
-                  <span className="inline-block text-xs text-bold bg-green-100  text-green-800 px-2 py-1 rounded-full animate-pulse">
+                  <span className="inline-block text-xs font-bold bg-green-100 text-green-800 px-2 py-1 rounded-full animate-pulse">
                     🔴 LIVE NOW
                   </span>
                   <div>
-                    <a
-                      href="/register"
+                    <Link
+                      to="/register"
                       className="inline-block text-sm font-semibold bg-orange-500 text-white px-4 py-2 rounded-full hover:bg-orange-600 transition"
                     >
                       Register Now
-                    </a>
+                    </Link>
                   </div>
                 </div>
               )}
