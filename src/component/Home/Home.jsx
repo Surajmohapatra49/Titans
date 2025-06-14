@@ -10,6 +10,12 @@ import slide04 from "../../assets/bg.jpg";
 import slide06 from "../../assets/cc.png";
 import lvImage from "../../assets/lv.jpg";
 
+/////
+import intense from "../../assets/int.jpg";
+import intens from "../../assets/in.png";
+import inten from "../../assets/i.png";
+
+////
 import slide51 from "../../assets/p1.jpg";
 import slide52 from "../../assets/pf.jpg";
 import slide53 from "../../assets/p3.jpg";
@@ -111,7 +117,7 @@ const Home = () => {
       <section className="grid md:grid-cols-3 gap-8 px-4 py-16 container mx-auto">
         {[
           {
-            img: slide02,
+            img: intense,
             title: "Intense Tournaments",
             text: "Fight for glory in monthly esports leagues.",
             features: [
@@ -121,7 +127,7 @@ const Home = () => {
             ],
           },
           {
-            img: slide02,
+            img: intens,
             title: "Global Leaderboards",
             text: "Top players ranked live, daily.",
             features: [
@@ -131,7 +137,7 @@ const Home = () => {
             ],
           },
           {
-            img: slide02,
+            img: inten,
             title: "Gaming Buzz",
             text: "Stay updated with every drop.",
             features: ["Patch notes", "Exclusive leaks", "Event reminders"],
@@ -284,33 +290,20 @@ const Home = () => {
                 {/* Header */}
                 <div className="flex items-center space-x-4 mb-4">
                   {/* Flip Image */}
-                  <div
-                    className="w-16 h-16"
-                    style={{
-                      perspective: "1000px",
-                    }}
-                  >
+                  <div className="w-16 h-16" style={{ perspective: "1000px" }}>
                     <div
                       className="relative w-full h-full transition-transform duration-700 group-hover:rotate-y-180"
-                      style={{
-                        transformStyle: "preserve-3d",
-                      }}
+                      style={{ transformStyle: "preserve-3d" }}
                     >
                       {/* Front Side */}
                       <div
                         className="absolute inset-0 rounded-full overflow-hidden border-4 border-rose-500 shadow-md"
-                        style={{
-                          backfaceVisibility: "hidden",
-                        }}
+                        style={{ backfaceVisibility: "hidden" }}
                       >
                         <img
                           src={t.img}
                           alt={t.name}
-                          className="w-full h-full object-cover"
-                          style={{
-                            filter: "blur(2px)",
-                            transform: "scale(1.05)",
-                          }}
+                          className="w-full h-full object-cover blur-0 md:blur-sm scale-105"
                         />
                       </div>
 
@@ -337,9 +330,7 @@ const Home = () => {
                   {/* Neon Name */}
                   <p
                     className={`text-lg font-bold tracking-wide group-hover:scale-105 transition-transform ${t.neonColor}`}
-                    style={{
-                      textShadow: t.glow,
-                    }}
+                    style={{ textShadow: t.glow }}
                   >
                     {t.name}
                   </p>
@@ -387,41 +378,50 @@ const Home = () => {
         animation: slideInUp 0.8s ease-out forwards;
         animation-delay: 0.6s;
       }
+
+      /* Auto trigger animation for mobile since hover isn't reliable */
+      @media (max-width: 768px) {
+        .hover-slide-in-left,
+        .hover-slide-in-up,
+        .hover-slide-in-right {
+          animation: slideInUp 0.8s ease-out forwards;
+        }
+      }
     `}
         </style>
 
-        <h2 className="text-6xl text-orange-600 font-extrabold text-center mb-16 tracking-wide">
+        <h2 className="text-4xl md:text-6xl text-orange-600 font-extrabold text-center mb-12 tracking-wide">
           Powered By
         </h2>
 
         <div
-          className="relative max-w-5xl mx-auto px-8 flex justify-between items-end"
-          style={{ height: 120 }}
+          className="relative max-w-5xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center md:items-end gap-8"
+          style={{ minHeight: 120 }}
         >
           {/* Left image */}
-          <div className="w-1/4 flex justify-center opacity-0 hover-slide-in-left">
+          <div className="w-full md:w-1/4 flex justify-center opacity-0 hover-slide-in-left">
             <img
               src={slide05}
               alt="Sponsor Left"
-              className="h-20 grayscale hover:grayscale-0 hover:scale-105 transition-all duration-500 shadow-lg hover:shadow-orange-500/50 rounded-xl"
+              className="h-20 grayscale hover:grayscale-0 hover:scale-105 transition-all duration-500 shadow-lg hover:shadow-orange-500/50 rounded-xl hover:rotate-1"
             />
           </div>
 
           {/* Middle image */}
-          <div className="w-1/4 flex justify-center opacity-0 hover-slide-in-up">
+          <div className="w-full md:w-1/4 flex justify-center opacity-0 hover-slide-in-up">
             <img
               src={slide06}
               alt="Sponsor Middle"
-              className="h-20 grayscale hover:grayscale-0 hover:scale-110 transition-all duration-500 shadow-lg hover:shadow-orange-500/70 rounded-xl"
+              className="h-20 grayscale hover:grayscale-0 hover:scale-110 transition-all duration-500 shadow-lg hover:shadow-orange-500/70 rounded-xl hover:rotate-1"
             />
           </div>
 
           {/* Right image */}
-          <div className="w-1/4 flex justify-center opacity-0 hover-slide-in-right">
+          <div className="w-full md:w-1/4 flex justify-center opacity-0 hover-slide-in-right">
             <img
               src={slide03}
               alt="Sponsor Right"
-              className="h-20 grayscale hover:grayscale-0 hover:scale-105 transition-all duration-500 shadow-lg hover:shadow-orange-500/50 rounded-xl"
+              className="h-20 grayscale hover:grayscale-0 hover:scale-105 transition-all duration-500 shadow-lg hover:shadow-orange-500/50 rounded-xl hover:-rotate-1"
             />
           </div>
         </div>
